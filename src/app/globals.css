@@ -1,26 +1,36 @@
-@import "tailwindcss";
+/* Tailwind base layers */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
+/* 
+  Theme tokens in RGB triplets so Tailwind opacity utilities work nicely.
+  Dark by default for that 2025 vibe.
+*/
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: 12 12 16;
+  --card: 18 18 24;
+  --text: 242 242 247;
+  --accent: 150 100 255;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+html { color-scheme: dark; }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: rgb(var(--bg));
+  color: rgb(var(--text));
+  font-feature-settings: "cv11","ss01";
+}
+
+/* Reusable “card” surface */
+.card {
+  background-color: rgb(var(--card));
+  border: 1px solid rgb(255 255 255 / 0.08);
+  border-radius: 1rem;
+}
+
+/* High visibility focus for keyboard users */
+:focus-visible {
+  outline: 2px solid rgb(var(--accent));
+  outline-offset: 2px;
 }
