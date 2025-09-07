@@ -53,6 +53,8 @@ export default function Starfield() {
       const COUNT = 850 
       const positions = new Float32Array(COUNT * 3)
       const scales = new Float32Array(COUNT)
+      const colors = new Float32Array(COUNT * 3)
+
       for (let i = 0; i < COUNT; i++) {
         const i3 = i * 3
         const r = 12 * Math.cbrt(Math.random())
@@ -62,11 +64,15 @@ export default function Starfield() {
         positions[i3 + 1] = r * Math.sin(phi) * Math.sin(theta)
         positions[i3 + 2] = r * Math.cos(phi)
         scales[i] = 0.6 + Math.random() * 0.8
+        colors[i3 + 0] = Math.random()
+        colors[i3 + 1] = Math.random() * 0.5
+        colors[i3 + 2] = Math.random() + 0.5
       }
 
       const geo = new THREE.BufferGeometry()
       geo.setAttribute("position", new THREE.BufferAttribute(positions, 3))
       geo.setAttribute("aScale", new THREE.BufferAttribute(scales, 1))
+      geo.setAttribute("aColor", new THREE.BufferAttribute(colors, 3))
 
       // Material from external GLSL
       const { vert, frag } = await loadShaders()
