@@ -3,8 +3,10 @@
 // Three injects: position, modelViewMatrix, projectionMatrix.
 
 attribute float aScale;   // per-point random scale
+attribute vec3 aColor;    // per-point color
 uniform float uTime;      // time from TS for subtle spin
 varying float vAlpha;     // opacity to fragment
+varying vec3 vColor;      // color to fragment
 
 void main() {
   vec3 p = position;
@@ -23,5 +25,6 @@ void main() {
   float size = (aScale * 0.8) * (220.0 / max(1.0, -mv.z));
   gl_PointSize = size;
 
+  vColor = aColor;
   gl_Position = projectionMatrix * mv;
 }
