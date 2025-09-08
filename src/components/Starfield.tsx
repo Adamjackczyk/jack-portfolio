@@ -31,7 +31,8 @@ export default function Starfield() {
         antialias: false,
         powerPreference: "high-performance",
       })
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5))
+      // Crisp but sane: cap DPR at 2
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
       renderer.setSize(width, height)
       renderer.outputColorSpace = THREE.SRGBColorSpace
       renderer.setClearColor(0x000000, 1)
@@ -42,35 +43,44 @@ export default function Starfield() {
       camera = new THREE.PerspectiveCamera(55, width / height, 0.1, 1000)
       camera.position.z = 6
 
-      // Geometry
-      const COUNT = 54850 
+      // Geometry + attributes
+      const COUNT = 54850
       const positions = new Float32Array(COUNT * 3)
       const scales = new Float32Array(COUNT)
       const colors = new Float32Array(COUNT * 3)
-      const phases = new Float32Array(COUNT);
+      const phases  = new Float32Array(COUNT)
 
       for (let i = 0; i < COUNT; i++) {
         const i3 = i * 3
-        const r = 16 * Math.cbrt(Math.random());
-        phases[i] = Math.random() * Math.PI * 2; 
+
+        // spherical distribution (denser toward center via cbrt)
+        const r = 16 * Math.cbrt(Math.random())
         const theta = Math.random() * Math.PI * 2.0
         const phi = Math.acos(2.0 * Math.random() - 1.0)
+
         positions[i3 + 0] = r * Math.sin(phi) * Math.cos(theta)
         positions[i3 + 1] = r * Math.sin(phi) * Math.sin(theta)
         positions[i3 + 2] = r * Math.cos(phi)
+
+        // subtle size variation
         scales[i] = 0.4 + Math.random() * 0.4
+
+        // colors
         colors[i3 + 0] = Math.random()
         colors[i3 + 1] = Math.random() * 0.5
         colors[i3 + 2] = Math.random() + 0.5
+
+        // twinkle phase
+        phases[i] = Math.random() * Math.PI * 2
       }
 
       const geo = new THREE.BufferGeometry()
       geo.setAttribute("position", new THREE.BufferAttribute(positions, 3))
-      geo.setAttribute("aScale", new THREE.BufferAttribute(scales, 1))
-      geo.setAttribute("aColor", new THREE.BufferAttribute(colors, 3))
-      geo.setAttribute("aPhase", new THREE.BufferAttribute(phases, 1));
+      geo.setAttribute("aScale",   new THREE.BufferAttribute(scales, 1))
+      geo.setAttribute("aColor",   new THREE.BufferAttribute(colors, 3))
+      geo.setAttribute("aPhase",   new THREE.BufferAttribute(phases, 1))
 
-      // Material from external GLSL
+      // Material (external GLSL)
       const { vert, frag } = await loadShaders()
       const mat = new THREE.ShaderMaterial({
         transparent: true,
@@ -84,7 +94,7 @@ export default function Starfield() {
       points = new THREE.Points(geo, mat)
       scene.add(points)
 
-      // Resize
+      // Resize handling
       const onResize = () => {
         if (!hostRef.current || !renderer || !camera) return
         const w = hostRef.current.clientWidth
@@ -95,7 +105,7 @@ export default function Starfield() {
       }
       window.addEventListener("resize", onResize)
 
-      // Animate
+      // Render loop (paused when tab hidden)
       const clock = new THREE.Clock()
       const loop = () => {
         const uTime = mat.uniforms.uTime as { value: number }
@@ -103,13 +113,25 @@ export default function Starfield() {
         renderer!.render(scene!, camera!)
         raf = requestAnimationFrame(loop)
       }
-      loop()
 
+      const onVis = () => {
+        if (document.hidden) {
+          if (raf) cancelAnimationFrame(raf)
+          raf = 0
+        } else if (raf === 0) {
+          loop()
+        }
+      }
+      document.addEventListener("visibilitychange", onVis)
+
+      // kick off
+      loop()
       setReady(true)
 
       // Cleanup
       return () => {
-        cancelAnimationFrame(raf)
+        document.removeEventListener("visibilitychange", onVis)
+        if (raf) cancelAnimationFrame(raf)
         window.removeEventListener("resize", onResize)
         try {
           renderer?.dispose()
