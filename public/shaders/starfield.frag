@@ -10,6 +10,6 @@ void main() {
   if (r2 > 1.0) discard;
 
   float core = pow(1.0 - r2, 3.4);
-  vec3 color = pow(vColor, vec3(1.2));
+  vec3 color = pow(vColor, vec3(0.69));
   gl_FragColor = vec4(color, core * vAlpha);
 }
