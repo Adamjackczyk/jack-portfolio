@@ -38,7 +38,7 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0, transition: { delay: 0.1 } }}
           className="max-w-xl mt-6 text-base sm:text-lg opacity-90"
         >
-          I build fast, immersive web experiences with clean code and real performance.
+          I specialize in building fast, immersive interfaces with React and WebGL. I enjoy solving performance challenges and creating memorable digital experiences.
         </motion.p>
 
         <motion.div

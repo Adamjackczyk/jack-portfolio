@@ -1,0 +1,30 @@
+[
+    {
+      "slug": "pokemon-explorer",
+      "title": "Pokémon Explorer",
+      "cover": "/thumbs/Pokemon Api website.png",
+      "tags": ["React", "TypeScript", "API"],
+      "metrics": "Instant search • Lighthouse 100"
+    },
+    {
+      "slug": "galaxy-generator",
+      "title": "Galaxy Generator",
+      "cover": "/thumbs/Animated-galaxy.png",
+      "tags": ["Three.js", "GLSL", "React"],
+      "metrics": "GPU particles • 60 FPS desktop • 30 FPS mobile"
+    },
+    {
+      "slug": "sea-shader",
+      "title": "Dynamic Sea Shader",
+      "cover": "/thumbs/Raging.png",
+      "tags": ["GLSL", "Normals", "Lighting"],
+      "metrics": "Custom normals • Specular highlights"
+    },
+    {
+      "slug": "around-the-us",
+      "title": "Around the US",
+      "cover": "/thumbs/Around the US.png",
+      "tags": ["React", "User Interface", "User Experience", "data base"],
+      "metrics": "Social Media"
+    }
+  ]
