@@ -1,0 +1,34 @@
+{
+  "title": "Raging Sea Shader",
+  "intro": "Real-time ocean with custom GLSL: layered wave displacement, on-GPU normals, and specular highlights — tuned to stay smooth.",
+  "links": {
+    "live": "https://adamjackczyk.github.io/THREEjs-raging-sea/",
+    "repo": "https://github.com/Adamjackczyk/THREEjs-raging-sea"
+  },
+  "heroMedia": { "type": "image", "src": "/thumbs/sea-shader.png" },
+  "problem": "Create a convincing, parameter-driven ocean that holds ~60 FPS on mid laptops and is easy to tweak during look-dev.",
+  "tools": ["Three.js", "GLSL", "TypeScript"],
+  "solution": [
+    "Custom vertex shader displaces a single plane using layered noise/Gerstner-style waves with per-wave controls.",
+    "On-GPU normal reconstruction via derivatives (dFdx/dFdy) for crisp lighting without normal maps.",
+    "Physically-inspired lighting (diffuse + specular) with view-dependent highlights and depth fog for scale.",
+    "Performance guards: capped devicePixelRatio, single draw call, lightweight material and no post-FX."
+  ],
+  "results": [
+    "~60 FPS on desktop (M1 Air • Chrome), ~30–45 FPS on typical mobile.",
+    "Shader parameters grouped and documented for quick look-dev iteration."
+  ],
+  "highlights": [
+    { "label": "Geometry", "value": "Single plane, GPU-displaced" },
+    { "label": "Normals", "value": "On-GPU" },
+    { "label": "FPS", "value": "≈60 desktop" }
+  ],
+  "codePointers": [
+    { "label": "sea.vert — wave displacement", "path": "public/shaders/sea.vert" },
+    { "label": "sea.frag — lighting & color", "path": "public/shaders/sea.frag" }
+  ],
+  "next": [
+    "Screen-space reflections pass for sun streaks",
+    "Wind gust control and Beaufort presets"
+  ]
+}
