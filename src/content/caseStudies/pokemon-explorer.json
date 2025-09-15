@@ -1,0 +1,37 @@
+{
+  "title": "Pokémon Explorer",
+  "intro": "Fast, searchable Pokédex with evolutions, shiny toggles, and a random team generator.",
+  "links": {
+    "live": "https://adamjackczyk.github.io/Pokeapi-frontend2/",
+    "repo": "https://github.com/Adamjackczyk/Pokeapi-frontend2"
+  },
+  "heroMedia": { "type": "image", "src": "/thumbs/pokemon-explorer.png" },
+  "problem": "Let users find any Pokémon instantly and explore evolutions/shiny forms without slow page hops.",
+  "tools": ["React", "TypeScript", "PokeAPI"],
+  "solution": [
+    "Instant search with debounced queries; renders details as you type.",
+    "Evolution traversal with previous/next and tree-hop navigation.",
+    "Per-Pokémon shiny toggle plus a mass shiny mode for the current view.",
+    "Random team generator (6 per click) with one-tap refresh.",
+    "Quality-of-life: sticky back-to-top, keyboard navigation, and focus rings."
+  ],
+  "results": [
+    "Sub-100 ms perceived search after debounce on typical connections.",
+    "Clear evolution traversal reduces page churn and confusion.",
+    "Random team flow increases engagement time."
+  ],
+  "highlights": [
+    { "label": "Search", "value": "Instant results" },
+    { "label": "Evolutions", "value": "Prev/Next + tree hop" },
+    { "label": "Shiny", "value": "Per-card + mass toggle" },
+    { "label": "Generator", "value": "6 random / click" }
+  ],
+  "codePointers": [
+    { "label": "Search & results", "url": "https://github.com/Adamjackczyk/Pokeapi-frontend2" },
+    { "label": "Random team & shiny logic", "url": "https://github.com/Adamjackczyk/Pokeapi-frontend2" }
+  ],
+  "next": [
+    "Local caching for offline revisit",
+    "Sprite prefetch for evolution chains"
+  ]
+}

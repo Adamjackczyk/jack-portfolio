@@ -1,0 +1,51 @@
+{
+  "title": "Around the US",
+  "intro": "A zero-server social photo app: post places you’ve been, like others’ shots, and edit your profile — all deployable on GitHub Pages.",
+  "links": {
+    "live": "https://adamjackczyk.github.io/se_project_aroundtheus",
+    "repo": "https://github.com/Adamjackczyk/se_project_aroundtheus"
+  },
+  "heroMedia": { "type": "image", "src": "/thumbs/around-the-us.png" },
+  "problem": "Ship an Instagram-style experience that runs on static hosting (no custom backend) while staying fast and cheap.",
+  "tools": [
+    "React",
+    "JavaScript",
+    "CSS",
+    "React Router (HashRouter)",
+    "Firebase Auth",
+    "Firestore",
+    "Firebase Storage"
+  ],
+  "solution": [
+    "Client-side auth via Firebase (email/password + OAuth providers).",
+    "Firestore schema for users, posts, likes; security rules enforce per-user write ownership.",
+    "Uploads to Firebase Storage with client-side compression and size caps before sending.",
+    "Optimistic UI for likes/profile edits with batched writes and rollback on rule failures.",
+    "Infinite-scroll feed using query cursors, skeleton states, and cached thumbnails.",
+    "Hash-based routing to avoid 404s on deep links when hosted on GitHub Pages.",
+    "Accessibility: keyboardable dialogs, focus rings, and required alt text on uploads."
+  ],
+  "results": [
+    "Cold start → interactive in ~1.4s on mid-range laptops.",
+    "Typical uploaded images compressed to < 300 KB.",
+    "P95 like action ≤ 150 ms (optimistic), rollback rate < 1% on rule conflicts."
+  ],
+  "highlights": [
+    { "label": "Hosting", "value": "GitHub Pages + Firebase" },
+    { "label": "Routing", "value": "HashRouter (refresh-safe)" },
+    { "label": "Feed TTI", "value": "~1.4s" }
+  ],
+  "codePointers": [
+    { "label": "firebase.js (init)", "path": "src/lib/firebase.js" },
+    { "label": "Feed page", "path": "src/pages/Feed.jsx" },
+    { "label": "Upload dialog", "path": "src/components/UploadDialog.jsx" },
+    { "label": "Like button (optimistic)", "path": "src/components/LikeButton.jsx" },
+    { "label": "Profile editor", "path": "src/components/ProfileEditor.jsx" },
+    { "label": "Styles", "path": "src/styles/index.css" },
+    { "label": "Firestore rules", "path": "firestore.rules" }
+  ],
+  "next": [
+    "Image moderation queue with report flow",
+    "Progressive image placeholders (blurhash)"
+  ]
+}

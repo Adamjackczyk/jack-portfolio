@@ -1,0 +1,34 @@
+{
+  "title": "Galaxy Generator",
+  "intro": "Real-time GPU starfield with per-star color and twinkle, clean GLSL files, and performance guards.",
+  "links": {
+    "live": "https://adamjackczyk.github.io/THREEjs-animated-galaxy/",
+    "repo": "https://github.com/Adamjackczyk/THREEjs-animated-galaxy"
+  },
+  "heroMedia": { "type": "image", "src": "/thumbs/galaxy-generator.png" },
+  "problem": "Deliver an immersive starfield background that stays smooth on mid-range laptops and is easy to iterate on.",
+  "tools": ["Three.js", "GLSL", "TypeScript", "Next.js"],
+  "solution": [
+    "Per-star attributes (scale, color, phase) in a single ShaderMaterial for variety and twinkle.",
+    "External GLSL in /public/shaders (fetched at runtime) to avoid bundler loaders and keep shaders tidy.",
+    "Performance guards: DPR cap, pause render when tab hidden, isolated stacking context under the hero."
+  ],
+  "results": [
+    "~60 FPS on desktop, ~30 FPS on typical mobile hardware.",
+    "No GPU leaks across route changes (proper dispose/cleanup)."
+  ],
+  "highlights": [
+    { "label": "Particles", "value": "≈54,850" },
+    { "label": "FPS", "value": "≈60 desktop" },
+    { "label": "Draw calls", "value": "1" }
+  ],
+  "codePointers": [
+    { "label": "Starfield.tsx", "path": "src/components/Starfield.tsx" },
+    { "label": "starfield.vert", "path": "public/shaders/starfield.vert" },
+    { "label": "starfield.frag", "path": "public/shaders/starfield.frag" }
+  ],
+  "next": [
+    "Parallax camera drift tied to scroll",
+    "Constellation lines toggle (thin segments)"
+  ]
+}
