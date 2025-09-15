@@ -5,7 +5,7 @@
     "live": "https://adamjackczyk.github.io/THREEjs-animated-galaxy/",
     "repo": "https://github.com/Adamjackczyk/THREEjs-animated-galaxy"
   },
-  "heroMedia": { "type": "image", "src": "/thumbs/galaxy-generator.png" },
+  "heroMedia": { "type": "video", "src": "/media/galaxy-loop.mp4" },
   "problem": "Deliver an immersive starfield background that stays smooth on mid-range laptops and is easy to iterate on.",
   "tools": ["Three.js", "GLSL", "TypeScript", "Next.js"],
   "solution": [

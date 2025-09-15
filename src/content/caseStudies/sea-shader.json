@@ -5,7 +5,7 @@
     "live": "https://adamjackczyk.github.io/THREEjs-raging-sea/",
     "repo": "https://github.com/Adamjackczyk/THREEjs-raging-sea"
   },
-  "heroMedia": { "type": "image", "src": "/thumbs/sea-shader.png" },
+  "heroMedia": { "type": "video", "src": "/media/sea-loop.mp4" },
   "problem": "Create a convincing, parameter-driven ocean that holds ~60 FPS on mid laptops and is easy to tweak during look-dev.",
   "tools": ["Three.js", "GLSL", "TypeScript"],
   "solution": [
@@ -24,8 +24,14 @@
     { "label": "FPS", "value": "≈60 desktop" }
   ],
   "codePointers": [
-    { "label": "sea.vert — wave displacement", "path": "public/shaders/sea.vert" },
-    { "label": "sea.frag — lighting & color", "path": "public/shaders/sea.frag" }
+    {
+      "label": "sea.vert — wave displacement",
+      "path": "public/shaders/sea.vert"
+    },
+    {
+      "label": "sea.frag — lighting & color",
+      "path": "public/shaders/sea.frag"
+    }
   ],
   "next": [
     "Screen-space reflections pass for sun streaks",

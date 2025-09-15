@@ -5,7 +5,7 @@
     "live": "https://adamjackczyk.github.io/Pokeapi-frontend2/",
     "repo": "https://github.com/Adamjackczyk/Pokeapi-frontend2"
   },
-  "heroMedia": { "type": "image", "src": "/thumbs/pokemon-explorer.png" },
+  "heroMedia": { "type": "video", "src": "/media/pokemon-explorer.mp4" },
   "problem": "Let users find any Pokémon instantly and explore evolutions/shiny forms without slow page hops.",
   "tools": ["React", "TypeScript", "PokeAPI"],
   "solution": [
@@ -27,8 +27,14 @@
     { "label": "Generator", "value": "6 random / click" }
   ],
   "codePointers": [
-    { "label": "Search & results", "url": "https://github.com/Adamjackczyk/Pokeapi-frontend2" },
-    { "label": "Random team & shiny logic", "url": "https://github.com/Adamjackczyk/Pokeapi-frontend2" }
+    {
+      "label": "Search & results",
+      "url": "https://github.com/Adamjackczyk/Pokeapi-frontend2"
+    },
+    {
+      "label": "Random team & shiny logic",
+      "url": "https://github.com/Adamjackczyk/Pokeapi-frontend2"
+    }
   ],
   "next": [
     "Local caching for offline revisit",

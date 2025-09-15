@@ -1,21 +1,24 @@
-import { notFound } from "next/navigation"
-import type { Metadata } from "next"
+import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 
-import projects from "@/content/projects.json"
-import { loadCase } from "@/lib/loadCase"
+import projects from "@/content/projects.json";
+import { loadCase } from "@/lib/loadCase";
 
-// ---- Static export setup (prebuild /work/<slug>) --------------------
+// --- Prebuild /work/<slug> for static export
 export function generateStaticParams() {
-  return (projects as { slug: string }[]).map(p => ({ slug: p.slug }))
+  return (projects as { slug: string }[]).map((p) => ({ slug: p.slug }));
 }
-export const dynamic = "error"
-export const dynamicParams = false
+export const dynamic = "error";
+export const dynamicParams = false;
 
-export async function generateMetadata(
-  { params }: { params: { slug: string } }
-): Promise<Metadata> {
-  const data = await loadCase(params.slug)
-  if (!data) return { title: "Case Study" }
+// --- Per-page metadata (SEO/OG)
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}): Promise<Metadata> {
+  const data = await loadCase(params.slug);
+  if (!data) return { title: "Case Study" };
   return {
     title: `${data.title} — Case Study`,
     description: data.intro,
@@ -24,28 +27,54 @@ export async function generateMetadata(
       description: data.intro,
       images: data.heroMedia?.src ? [{ url: data.heroMedia.src }] : undefined,
     },
-  }
+  };
 }
 
-// ---- Page ------------------------------------------------------------
-export default async function CasePage({ params }: { params: { slug: string } }) {
-  const data = await loadCase(params.slug)
-  if (!data) return notFound()
+// --- Page
+export default async function CasePage({
+  params,
+}: {
+  params: { slug: string };
+}) {
+  const data = await loadCase(params.slug);
+  if (!data) return notFound();
 
   return (
-    <main className="container mx-auto px-6 py-12">
+    <main className="container mx-auto px-6 py-12" aria-label="Case study">
       {/* HERO MEDIA */}
       {data.heroMedia?.type === "video" ? (
         <div className="relative aspect-video rounded-2xl overflow-hidden card">
+          {/* Hide motion if user prefers reduced motion; show poster instead */}
           <video
-            src={data.heroMedia.src}
-            poster={data.heroMedia.poster}
+            className="w-full h-full object-cover motion-reduce:hidden"
             autoPlay
             muted
             loop
             playsInline
-            className="w-full h-full object-cover"
-          />
+            preload="metadata"
+            poster={data.heroMedia.poster}
+          >
+            {/* If you exported a .webm, this line will work; harmless if missing */}
+            <source
+              src={
+                (data.heroMedia.src as string).endsWith(".mp4")
+                  ? (data.heroMedia.src as string).replace(".mp4", ".webm")
+                  : (data.heroMedia.src as string)
+              }
+              type="video/webm"
+            />
+            <source src={data.heroMedia.src} type="video/mp4" />
+          </video>
+
+          {/* Reduced-motion fallback (or while video is loading) */}
+          {data.heroMedia.poster && (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={data.heroMedia.poster}
+              alt={data.title}
+              className="hidden motion-reduce:block w-full h-full object-cover"
+            />
+          )}
         </div>
       ) : data.heroMedia?.src ? (
         <div className="relative aspect-video rounded-2xl overflow-hidden card">
@@ -61,8 +90,12 @@ export default async function CasePage({ params }: { params: { slug: string } })
       {/* HEADER */}
       <header className="mt-6">
         <p className="opacity-70 text-sm">Case Study</p>
-        <h1 className="text-3xl sm:text-4xl font-semibold mt-1">{data.title}</h1>
-        {data.intro && <p className="mt-3 opacity-85 max-w-2xl">{data.intro}</p>}
+        <h1 className="text-3xl sm:text-4xl font-semibold mt-1">
+          {data.title}
+        </h1>
+        {data.intro && (
+          <p className="mt-3 opacity-85 max-w-2xl">{data.intro}</p>
+        )}
 
         {(data.links?.live || data.links?.repo) && (
           <div className="mt-4 flex gap-3">
@@ -159,7 +192,10 @@ export default async function CasePage({ params }: { params: { slug: string } })
               <div className="mt-3 grid grid-cols-2 gap-3">
                 {data.highlights.map(
                   (h: { label: string; value: string }, i: number) => (
-                    <div key={i} className="rounded-xl border border-white/10 p-3">
+                    <div
+                      key={i}
+                      className="rounded-xl border border-white/10 p-3"
+                    >
                       <div className="text-xs opacity-70">{h.label}</div>
                       <div className="text-lg font-semibold">{h.value}</div>
                     </div>
@@ -211,5 +247,5 @@ export default async function CasePage({ params }: { params: { slug: string } })
         </a>
       </div>
     </main>
-  )
+  );
 }

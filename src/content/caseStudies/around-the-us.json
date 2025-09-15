@@ -5,7 +5,7 @@
     "live": "https://adamjackczyk.github.io/se_project_aroundtheus",
     "repo": "https://github.com/Adamjackczyk/se_project_aroundtheus"
   },
-  "heroMedia": { "type": "image", "src": "/thumbs/around-the-us.png" },
+  "heroMedia": { "type": "video", "src": "/media/around-the-us.mp4" },
   "problem": "Ship an Instagram-style experience that runs on static hosting (no custom backend) while staying fast and cheap.",
   "tools": [
     "React",
@@ -39,7 +39,10 @@
     { "label": "firebase.js (init)", "path": "src/lib/firebase.js" },
     { "label": "Feed page", "path": "src/pages/Feed.jsx" },
     { "label": "Upload dialog", "path": "src/components/UploadDialog.jsx" },
-    { "label": "Like button (optimistic)", "path": "src/components/LikeButton.jsx" },
+    {
+      "label": "Like button (optimistic)",
+      "path": "src/components/LikeButton.jsx"
+    },
     { "label": "Profile editor", "path": "src/components/ProfileEditor.jsx" },
     { "label": "Styles", "path": "src/styles/index.css" },
     { "label": "Firestore rules", "path": "firestore.rules" }
