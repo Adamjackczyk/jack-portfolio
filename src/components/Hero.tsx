@@ -1,10 +1,4 @@
 "use client"
-/**
- * Hero.tsx
- * Above-the-fold pitch with clear CTAs.
- * Uses `isolate` to create a local stacking context so the starfield (z-0)
- * sits behind the content (z-10) but above the page background.
- */
 
 import { motion } from "framer-motion"
 import Link from "next/link"
@@ -38,36 +32,37 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0, transition: { delay: 0.1 } }}
           className="max-w-xl mt-6 text-base sm:text-lg opacity-90"
         >
-          I specialize in building fast, immersive interfaces with React and WebGL. I enjoy solving performance challenges and creating memorable digital experiences.
+          I specialize in building fast, immersive interfaces with React and WebGL.
+          I enjoy solving performance challenges and creating memorable digital experiences.
         </motion.p>
 
         <motion.div
-  initial={{ opacity: 0, y: 8 }}
-  animate={{ opacity: 1, y: 0, transition: { delay: 0.2 } }}
-  className="mt-8 flex flex-wrap gap-3"
->
-  <Link
-    href="/#work"
-    className="px-5 py-3 rounded-2xl bg-white text-black font-medium hover:opacity-90 focus-visible:outline"
-  >
-    View Work
-  </Link>
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0, transition: { delay: 0.2 } }}
+          className="mt-8 flex flex-wrap gap-3"
+        >
+          <Link
+            href="/#work"
+            className="px-5 py-3 rounded-2xl bg-white text-black font-medium hover:opacity-90 focus-visible:outline"
+          >
+            View Work
+          </Link>
 
-  <Link
-    href="/about"
-    className="px-5 py-3 rounded-2xl border border-white/30 hover:border-white/60 focus-visible:outline"
-  >
-    About me
-  </Link>
+          <Link
+            href="/about"
+            className="px-5 py-3 rounded-2xl border border-white/30 hover:border-white/60 focus-visible:outline"
+          >
+            About me
+          </Link>
 
-  {/* temporary contact: mailto until /contact exists */}
-  <a
-    href="mailto:your.email@example.com"
-    className="px-5 py-3 rounded-2xl border border-white/30 hover:border-white/60 focus-visible:outline"
-  >
-    Contact
-  </a>
-</motion.div>
+          {/* route to the contact section (no OS mail prompt) */}
+          <Link
+            href="/about#contact"
+            className="px-5 py-3 rounded-2xl border border-white/30 hover:border-white/60 focus-visible:outline"
+          >
+            Contact
+          </Link>
+        </motion.div>
       </div>
     </section>
   )
