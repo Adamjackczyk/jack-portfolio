@@ -42,23 +42,32 @@ export default function Hero() {
         </motion.p>
 
         <motion.div
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0, transition: { delay: 0.2 } }}
-          className="mt-8 flex gap-3"
-        >
-          <Link
-            href="/#work"
-            className="px-5 py-3 rounded-2xl bg-white text-black font-medium hover:opacity-90 focus-visible:outline"
-          >
-            View Work
-          </Link>
-          <Link
-            href="/contact"
-            className="px-5 py-3 rounded-2xl border border-white/30 hover:border-white/60 focus-visible:outline"
-          >
-            Contact Me
-          </Link>
-        </motion.div>
+  initial={{ opacity: 0, y: 8 }}
+  animate={{ opacity: 1, y: 0, transition: { delay: 0.2 } }}
+  className="mt-8 flex flex-wrap gap-3"
+>
+  <Link
+    href="/#work"
+    className="px-5 py-3 rounded-2xl bg-white text-black font-medium hover:opacity-90 focus-visible:outline"
+  >
+    View Work
+  </Link>
+
+  <Link
+    href="/about"
+    className="px-5 py-3 rounded-2xl border border-white/30 hover:border-white/60 focus-visible:outline"
+  >
+    About me
+  </Link>
+
+  {/* temporary contact: mailto until /contact exists */}
+  <a
+    href="mailto:your.email@example.com"
+    className="px-5 py-3 rounded-2xl border border-white/30 hover:border-white/60 focus-visible:outline"
+  >
+    Contact
+  </a>
+</motion.div>
       </div>
     </section>
   )
