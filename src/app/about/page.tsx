@@ -1,41 +1,38 @@
-import Image from "next/image";
-import CopyEmailButton from "@/components/CopyEmailButton";
+import Image from "next/image"
+import CopyEmailButton from "@/components/CopyEmailButton"
 
 export const metadata = {
   title: "About — Jack Adamczyk",
   description:
     "Front-End developer focused on fast, immersive web experiences with React, TypeScript, and Three.js.",
-};
+}
 
 export default function AboutPage() {
-  const email = "jackadamczykjs@gmail.com";
-  const linkedIn = "https://www.linkedin.com/in/jackadamczyk";
-  const github = "https://github.com/Adamjackczyk";
-  const resumeHref = "/resume/jack-adamczyk-resume.pdf";
+  const email = "jackadamczykjs@gmail.com"
+  const linkedIn = "https://www.linkedin.com/in/jackadamczyk"
+  const github = "https://github.com/Adamjackczyk"
+  const resumeHref = "/resume/jack-adamczyk-resume.pdf"
 
   const mailto = `mailto:${email}?subject=${encodeURIComponent(
     "Front-End Role — Portfolio inquiry"
-  )}&body=${encodeURIComponent(
-    `Hi Jack,
+  )}&body=${encodeURIComponent(`Hi Jack,
 
 I came across your portfolio and would love to chat about a front-end opportunity.
 
-—`
-  )}`;
+—`)}`
 
   return (
     <main className="container mx-auto px-6 py-12">
-      {/* ---------- HERO (stronger presence) ---------- */}
+      {/* ---------- HERO ---------- */}
       <header className="max-w-5xl">
         <p className="opacity-70 text-sm">About</p>
 
-        {/* 2-col on desktop for presence */}
         <div className="mt-2 grid gap-6 lg:grid-cols-[auto,1fr] lg:items-center">
           {/* Avatar */}
           <div className="flex lg:block justify-start">
             <div className="relative h-24 w-24 sm:h-28 sm:w-28 rounded-full overflow-hidden border border-white/10 shadow-[0_0_0_4px_rgba(255,255,255,0.06)]">
               <Image
-                src="/thumbs/me3.png"
+                src="/thumbs/me.png"
                 alt="Jack Adamczyk"
                 fill
                 sizes="112px"
@@ -58,23 +55,15 @@ I came across your portfolio and would love to chat about a front-end opportunit
             </p>
 
             <div className="mt-4 flex flex-wrap gap-2">
-              <span className="px-3 py-1 rounded-full border border-white/15 text-sm opacity-90">
-                Columbus, GA-area
-              </span>
-              <span className="px-3 py-1 rounded-full border border-white/15 text-sm opacity-90">
-                Remote possible
-              </span>
-              <span className="px-3 py-1 rounded-full border border-white/15 text-sm opacity-90">
-                Open to Front-End roles
-              </span>
-              <span className="px-3 py-1 rounded-full border border-white/15 text-sm opacity-90">
-                Immediate start
-              </span>
+              <span className="px-3 py-1 rounded-full border border-white/15 text-sm opacity-90">Columbus, GA-area</span>
+              <span className="px-3 py-1 rounded-full border border-white/15 text-sm opacity-90">Remote possible</span>
+              <span className="px-3 py-1 rounded-full border border-white/15 text-sm opacity-90">Open to Front-End roles</span>
+              <span className="px-3 py-1 rounded-full border border-white/15 text-sm opacity-90">Immediate start</span>
             </div>
 
             {/* CTAs + Socials */}
-            <div className="mt-5 flex flex-wrap gap-3">
-              {/* Easier contact: prefilled email */}
+            <section id="contact" className="mt-5 flex flex-wrap gap-3">
+              {/* Prefilled email */}
               <a
                 className="px-4 py-2 rounded-2xl bg-white text-black font-medium hover:opacity-90"
                 href={mailto}
@@ -85,7 +74,7 @@ I came across your portfolio and would love to chat about a front-end opportunit
               {/* One-click copy */}
               <CopyEmailButton email={email} />
 
-              {/* View résumé in browser (no download) */}
+              {/* View résumé in browser */}
               <a
                 className="px-4 py-2 rounded-2xl border border-white/30 hover:border-white/60"
                 href={resumeHref}
@@ -125,12 +114,12 @@ I came across your portfolio and would love to chat about a front-end opportunit
                   />
                 </svg>
               </a>
-            </div>
+            </section>
           </div>
         </div>
       </header>
 
-      {/* ---------- HIGHLIGHTS STRIP (visual weight) ---------- */}
+      {/* HIGHLIGHTS */}
       <section className="mt-10">
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {[
@@ -148,24 +137,16 @@ I came across your portfolio and would love to chat about a front-end opportunit
         </div>
       </section>
 
-      {/* ---------- CONTENT GRID (Main + Sidebar) ---------- */}
+      {/* MAIN + SIDEBAR */}
       <section className="mt-12 grid gap-10 lg:grid-cols-3">
-        {/* Main column */}
         <div className="lg:col-span-2 space-y-10">
-          {/* TECH STRIP */}
+          {/* Tech */}
           <section>
             <h2 className="text-xl font-semibold">Tech I use</h2>
             <ul className="mt-4 flex flex-wrap gap-3">
               {[
-                "React",
-                "TypeScript",
-                "Next.js",
-                "Three.js",
-                "GLSL",
-                "Tailwind",
-                "Framer Motion",
-                "Vite/Next Build",
-                "Jest/RTL",
+                "React","TypeScript","Next.js","Three.js","GLSL",
+                "Tailwind","Framer Motion","Vite/Next Build","Jest/RTL",
               ].map((t) => (
                 <li
                   key={t}
@@ -179,17 +160,13 @@ I came across your portfolio and would love to chat about a front-end opportunit
             </ul>
           </section>
 
-          {/* RECENT WINS */}
+          {/* Wins */}
           <section>
             <h2 className="text-xl font-semibold">Recent wins</h2>
             <ul className="space-y-3 opacity-85 list-disc pl-5 mt-4">
-              <li>
-                Built real-time starfield shader (≈55k particles) with 60 FPS desktop, clean GLSL files.
-              </li>
+              <li>Built real-time starfield shader (≈55k particles) with 60 FPS desktop, clean GLSL files.</li>
               <li>Shipped ocean shader with on-GPU normals (dFdx/dFdy) and specular highlights.</li>
-              <li>
-                Pokédex app with instant search, evolutions, and shiny toggles; sub-100ms perceived results.
-              </li>
+              <li>Pokédex app with instant search, evolutions, and shiny toggles; sub-100ms perceived results.</li>
               <li>Static-hosted social app with Firebase Auth/Firestore, optimistic UI, and hash routing.</li>
             </ul>
           </section>
@@ -274,7 +251,6 @@ I came across your portfolio and would love to chat about a front-end opportunit
             </div>
           </div>
 
-          {/* Optional “Now” card */}
           <div className="rounded-2xl border border-white/10 p-4">
             <div className="text-sm font-medium">Now</div>
             <ul className="mt-2 text-sm opacity-85 list-disc pl-4 space-y-1">
@@ -286,7 +262,7 @@ I came across your portfolio and would love to chat about a front-end opportunit
         </aside>
       </section>
 
-      {/* ---------- JSON-LD for SEO ---------- */}
+      {/* JSON-LD for SEO */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -297,11 +273,11 @@ I came across your portfolio and would love to chat about a front-end opportunit
             jobTitle: "Front-End Developer",
             email: `mailto:${email}`,
             url: process.env.NEXT_PUBLIC_SITE_URL,
-            image: "/thumbs/me3.png",
+            image: "/me.png",
             sameAs: [github, linkedIn],
           }),
         }}
       />
     </main>
-  );
+  )
 }
