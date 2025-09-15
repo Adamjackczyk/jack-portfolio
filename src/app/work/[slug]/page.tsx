@@ -1,24 +1,24 @@
-import { notFound } from "next/navigation";
-import type { Metadata } from "next";
+// src/app/work/[slug]/page.tsx
+import { notFound } from "next/navigation"
+import type { Metadata } from "next"
 
-import projects from "@/content/projects.json";
-import { loadCase } from "@/lib/loadCase";
+import projects from "@/content/projects.json"
+import { loadCase } from "@/lib/loadCase"
 
 // --- Prebuild /work/<slug> for static export
 export function generateStaticParams() {
-  return (projects as { slug: string }[]).map((p) => ({ slug: p.slug }));
+  return (projects as { slug: string }[]).map(p => ({ slug: p.slug }))
 }
-export const dynamic = "error";
-export const dynamicParams = false;
+export const dynamic = "error"
+export const dynamicParams = false
 
 // --- Per-page metadata (SEO/OG)
-export async function generateMetadata({
-  params,
-}: {
-  params: { slug: string };
-}): Promise<Metadata> {
-  const data = await loadCase(params.slug);
-  if (!data) return { title: "Case Study" };
+export async function generateMetadata(
+  { params }: { params: Promise<{ slug: string }> }     // 👈 Next 15: params is a Promise
+): Promise<Metadata> {
+  const { slug } = await params                          // 👈 await params
+  const data = await loadCase(slug)
+  if (!data) return { title: "Case Study" }
   return {
     title: `${data.title} — Case Study`,
     description: data.intro,
@@ -27,24 +27,26 @@ export async function generateMetadata({
       description: data.intro,
       images: data.heroMedia?.src ? [{ url: data.heroMedia.src }] : undefined,
     },
-  };
+  }
 }
 
 // --- Page
-export default async function CasePage({
-  params,
-}: {
-  params: { slug: string };
-}) {
-  const data = await loadCase(params.slug);
-  if (!data) return notFound();
+export default async function CasePage(
+  { params }: { params: Promise<{ slug: string }> }      // 👈 Promise here too
+) {
+  const { slug } = await params                          // 👈 await here
+  const data = await loadCase(slug)
+  if (!data) return notFound()
+
+  // Optional: read an optional webm from JSON without changing your types
+  const webmSrc = (data.heroMedia as any)?.webm as string | undefined
 
   return (
     <main className="container mx-auto px-6 py-12" aria-label="Case study">
       {/* HERO MEDIA */}
       {data.heroMedia?.type === "video" ? (
         <div className="relative aspect-video rounded-2xl overflow-hidden card">
-          {/* Hide motion if user prefers reduced motion; show poster instead */}
+          {/* Hide motion for users who prefer reduced motion */}
           <video
             className="w-full h-full object-cover motion-reduce:hidden"
             autoPlay
@@ -54,15 +56,8 @@ export default async function CasePage({
             preload="metadata"
             poster={data.heroMedia.poster}
           >
-            {/* If you exported a .webm, this line will work; harmless if missing */}
-            <source
-              src={
-                (data.heroMedia.src as string).endsWith(".mp4")
-                  ? (data.heroMedia.src as string).replace(".mp4", ".webm")
-                  : (data.heroMedia.src as string)
-              }
-              type="video/webm"
-            />
+            {/* Only add WebM source if you actually have one to avoid 404s */}
+            {webmSrc && <source src={webmSrc} type="video/webm" />}
             <source src={data.heroMedia.src} type="video/mp4" />
           </video>
 
@@ -90,12 +85,8 @@ export default async function CasePage({
       {/* HEADER */}
       <header className="mt-6">
         <p className="opacity-70 text-sm">Case Study</p>
-        <h1 className="text-3xl sm:text-4xl font-semibold mt-1">
-          {data.title}
-        </h1>
-        {data.intro && (
-          <p className="mt-3 opacity-85 max-w-2xl">{data.intro}</p>
-        )}
+        <h1 className="text-3xl sm:text-4xl font-semibold mt-1">{data.title}</h1>
+        {data.intro && <p className="mt-3 opacity-85 max-w-2xl">{data.intro}</p>}
 
         {(data.links?.live || data.links?.repo) && (
           <div className="mt-4 flex gap-3">
@@ -138,9 +129,7 @@ export default async function CasePage({
             <div>
               <h2 className="text-xl font-semibold">Solution</h2>
               <ul className="mt-2 space-y-2 opacity-85 list-disc pl-5">
-                {data.solution.map((s: string, i: number) => (
-                  <li key={i}>{s}</li>
-                ))}
+                {data.solution.map((s: string, i: number) => <li key={i}>{s}</li>)}
               </ul>
             </div>
           )}
@@ -149,9 +138,7 @@ export default async function CasePage({
             <div>
               <h2 className="text-xl font-semibold">Results</h2>
               <ul className="mt-2 space-y-2 opacity-85 list-disc pl-5">
-                {data.results.map((r: string, i: number) => (
-                  <li key={i}>{r}</li>
-                ))}
+                {data.results.map((r: string, i: number) => <li key={i}>{r}</li>)}
               </ul>
             </div>
           )}
@@ -160,9 +147,7 @@ export default async function CasePage({
             <div>
               <h2 className="text-xl font-semibold">Next</h2>
               <ul className="mt-2 space-y-2 opacity-85 list-disc pl-5">
-                {data.next.map((n: string, i: number) => (
-                  <li key={i}>{n}</li>
-                ))}
+                {data.next.map((n: string, i: number) => <li key={i}>{n}</li>)}
               </ul>
             </div>
           )}
@@ -175,10 +160,7 @@ export default async function CasePage({
               <h3 className="font-semibold">Tools</h3>
               <div className="mt-3 flex flex-wrap gap-2">
                 {data.tools.map((t: string) => (
-                  <span
-                    key={t}
-                    className="px-2 py-1 rounded-full border border-white/15 text-xs opacity-90"
-                  >
+                  <span key={t} className="px-2 py-1 rounded-full border border-white/15 text-xs opacity-90">
                     {t}
                   </span>
                 ))}
@@ -190,17 +172,12 @@ export default async function CasePage({
             <div className="card p-4">
               <h3 className="font-semibold">Highlights</h3>
               <div className="mt-3 grid grid-cols-2 gap-3">
-                {data.highlights.map(
-                  (h: { label: string; value: string }, i: number) => (
-                    <div
-                      key={i}
-                      className="rounded-xl border border-white/10 p-3"
-                    >
-                      <div className="text-xs opacity-70">{h.label}</div>
-                      <div className="text-lg font-semibold">{h.value}</div>
-                    </div>
-                  )
-                )}
+                {data.highlights.map((h: { label: string; value: string }, i: number) => (
+                  <div key={i} className="rounded-xl border border-white/10 p-3">
+                    <div className="text-xs opacity-70">{h.label}</div>
+                    <div className="text-lg font-semibold">{h.value}</div>
+                  </div>
+                ))}
               </div>
             </div>
           )}
@@ -209,29 +186,24 @@ export default async function CasePage({
             <div className="card p-4">
               <h3 className="font-semibold">Read the Code</h3>
               <ul className="mt-3 space-y-2">
-                {data.codePointers.map(
-                  (
-                    c: { label: string; url?: string; path?: string },
-                    i: number
-                  ) => (
-                    <li key={i}>
-                      {c.url ? (
-                        <a
-                          className="underline underline-offset-4 opacity-85 hover:opacity-100"
-                          href={c.url}
-                          target="_blank"
-                          rel="noreferrer"
-                        >
-                          {c.label}
-                        </a>
-                      ) : c.path ? (
-                        <span className="opacity-75">
-                          {c.label} — <code>{c.path}</code>
-                        </span>
-                      ) : null}
-                    </li>
-                  )
-                )}
+                {data.codePointers.map((c: { label: string; url?: string; path?: string }, i: number) => (
+                  <li key={i}>
+                    {c.url ? (
+                      <a
+                        className="underline underline-offset-4 opacity-85 hover:opacity-100"
+                        href={c.url}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        {c.label}
+                      </a>
+                    ) : c.path ? (
+                      <span className="opacity-75">
+                        {c.label} — <code>{c.path}</code>
+                      </span>
+                    ) : null}
+                  </li>
+                ))}
               </ul>
             </div>
           )}
@@ -247,5 +219,5 @@ export default async function CasePage({
         </a>
       </div>
     </main>
-  );
+  )
 }
