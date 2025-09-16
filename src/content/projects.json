@@ -1,30 +1,30 @@
 [
-    {
-      "slug": "pokemon-explorer",
-      "title": "Pokémon Explorer",
-      "cover": "/thumbs/pokemon-explorer.png",
-      "tags": ["React", "TypeScript", "API"],
-      "metrics": "Instant search • Lighthouse 100"
-    },
-    {
-      "slug": "galaxy-generator",
-      "title": "Galaxy Generator",
-      "cover": "/thumbs/galaxy-generator.png",
-      "tags": ["Three.js", "GLSL", "React"],
-      "metrics": "GPU particles • 60 FPS desktop • 30 FPS mobile"
-    },
-    {
-      "slug": "sea-shader",
-      "title": "Dynamic Sea Shader",
-      "cover": "/thumbs/sea-shader.png",
-      "tags": ["GLSL", "Normals", "Lighting"],
-      "metrics": "Custom normals • Specular highlights"
-    },
-    {
-      "slug": "around-the-us",
-      "title": "Around the US",
-      "cover": "/thumbs/around-the-us.png",
-      "tags": ["React", "User Interface", "User Experience", "data base"],
-      "metrics": "Social Media"
-    }
-  ]
+  {
+    "slug": "pokemon-explorer",
+    "title": "Pokémon Explorer",
+    "cover": "/thumbs/pokemon-explorer.png",
+    "tags": ["React", "PokeAPI"],
+    "metrics": "Instant search • Evolutions • Shiny toggle"
+  },
+  {
+    "slug": "galaxy-generator",
+    "title": "Galaxy Generator",
+    "cover": "/thumbs/galaxy-generator.png",
+    "tags": ["Three.js", "GLSL", "Vite"],
+    "metrics": "GPU particles • 60 FPS desktop • ~30 FPS mobile"
+  },
+  {
+    "slug": "sea-shader",
+    "title": "Dynamic Sea Shader",
+    "cover": "/thumbs/sea-shader.png",
+    "tags": ["Three.js", "GLSL", "Lighting"],
+    "metrics": "On-GPU normals • Specular highlights • Single draw call"
+  },
+  {
+    "slug": "around-the-us",
+    "title": "Around the US",
+    "cover": "/thumbs/around-the-us.png",
+    "tags": ["Vanilla JS", "OOP", "Forms"],
+    "metrics": "Responsive grid • Modal system • Client-side validation"
+  }
+]

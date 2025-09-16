@@ -1,34 +1,52 @@
 {
-  "title": "Galaxy Generator",
-  "intro": "Real-time GPU starfield with per-star color and twinkle, clean GLSL files, and performance guards.",
+  "slug": "galaxy-generator",
+  "title": "Animated Galaxy",
+  "intro": "GPU particle galaxy with spiral-arm distribution, per-star color/size, and smooth animation — vanilla JS + GLSL built with Vite.",
   "links": {
     "live": "https://adamjackczyk.github.io/THREEjs-animated-galaxy/",
     "repo": "https://github.com/Adamjackczyk/THREEjs-animated-galaxy"
   },
   "heroMedia": { "type": "video", "src": "/media/galaxy-loop.mp4" },
-  "problem": "Deliver an immersive starfield background that stays smooth on mid-range laptops and is easy to iterate on.",
-  "tools": ["Three.js", "GLSL", "TypeScript", "Next.js"],
+
+  "problem": "Render tens of thousands of stars in a convincing spiral galaxy while preserving 60 FPS on typical laptops and keeping shader code tidy and tweakable.",
+  "tools": [
+    "JavaScript (ES Modules)",
+    "Vite",
+    "Three.js",
+    "GLSL (vertex/fragment)",
+    "CSS"
+  ],
+
   "solution": [
-    "Per-star attributes (scale, color, phase) in a single ShaderMaterial for variety and twinkle.",
-    "External GLSL in /public/shaders (fetched at runtime) to avoid bundler loaders and keep shaders tidy.",
-    "Performance guards: DPR cap, pause render when tab hidden, isolated stacking context under the hero."
+    "Parametric spiral-arm distribution on the CPU, with noise-based radial jitter to avoid banding.",
+    "Single draw call using `THREE.Points` + `BufferGeometry` with packed attributes (position, size, color, arm bias).",
+    "Custom GLSL shaders in separate files (`src/shaders/galaxy/vertex.glsl`, `fragment.glsl`) to control point size, color falloff, and bloom-friendly additive blending.",
+    "Time uniform animates subtle rotation and twinkle without re-uploading buffers.",
+    "Vite dev/build for instant reloads and simple static deploys to GitHub Pages."
   ],
+
   "results": [
-    "~60 FPS on desktop, ~30 FPS on typical mobile hardware.",
-    "No GPU leaks across route changes (proper dispose/cleanup)."
+    "≈50k–100k particles at ~60 FPS on desktop (when DPR is sensible).",
+    "Clean separation: shaders live in `src/shaders/galaxy/*`, engine logic in `src/script.js`."
   ],
+
   "highlights": [
-    { "label": "Particles", "value": "≈54,850" },
-    { "label": "FPS", "value": "≈60 desktop" },
-    { "label": "Draw calls", "value": "1" }
+    { "label": "Particles", "value": "50k–100k" },
+    { "label": "Draw calls", "value": "1" },
+    { "label": "Build", "value": "Vite" }
   ],
+
   "codePointers": [
-    { "label": "Starfield.tsx", "path": "src/components/Starfield.tsx" },
-    { "label": "starfield.vert", "path": "public/shaders/starfield.vert" },
-    { "label": "starfield.frag", "path": "public/shaders/starfield.frag" }
+    { "label": "Vertex shader", "path": "src/shaders/galaxy/vertex.glsl" },
+    { "label": "Fragment shader", "path": "src/shaders/galaxy/fragment.glsl" },
+    { "label": "Scene + buffers", "path": "src/script.js" },
+    { "label": "Entry / template", "path": "src/index.html" },
+    { "label": "Vite config", "path": "vite.config.js" }
   ],
+
   "next": [
-    "Parallax camera drift tied to scroll",
-    "Constellation lines toggle (thin segments)"
+    "Add UI controls (arms, spin, randomness, color) with a small panel (e.g., Tweakpane).",
+    "HDR pass + selective bloom for star cores, with performance toggle.",
+    "Orbit camera inertia + auto-centering for better first impression."
   ]
 }

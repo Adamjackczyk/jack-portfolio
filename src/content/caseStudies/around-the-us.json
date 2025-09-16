@@ -1,54 +1,56 @@
 {
+  "slug": "around-the-us",
   "title": "Around the US",
-  "intro": "A zero-server social photo app: post places you’ve been, like others’ shots, and edit your profile — all deployable on GitHub Pages.",
+  "intro": "A no-framework photo-sharing UI: add cards, like/unlike, preview full images, and edit profile — built with ES6 classes, semantic HTML, and BEM CSS.",
   "links": {
     "live": "https://adamjackczyk.github.io/se_project_aroundtheus",
     "repo": "https://github.com/Adamjackczyk/se_project_aroundtheus"
   },
   "heroMedia": { "type": "video", "src": "/media/around-the-us.mp4" },
-  "problem": "Ship an Instagram-style experience that runs on static hosting (no custom backend) while staying fast and cheap.",
+
+  "problem": "Ship an Instagram-style interface with clean architecture (no framework) that handles cards, modals, form validation, and API plumbing without getting spaghetti-ish.",
   "tools": [
-    "React",
-    "JavaScript",
-    "CSS",
-    "React Router (HashRouter)",
-    "Firebase Auth",
-    "Firestore",
-    "Firebase Storage"
+    "JavaScript (ES6 Modules)",
+    "HTML",
+    "BEM CSS",
+    "Webpack/Babel",
+    "PostCSS/Autoprefixer"
   ],
+
   "solution": [
-    "Client-side auth via Firebase (email/password + OAuth providers).",
-    "Firestore schema for users, posts, likes; security rules enforce per-user write ownership.",
-    "Uploads to Firebase Storage with client-side compression and size caps before sending.",
-    "Optimistic UI for likes/profile edits with batched writes and rollback on rule failures.",
-    "Infinite-scroll feed using query cursors, skeleton states, and cached thumbnails.",
-    "Hash-based routing to avoid 404s on deep links when hosted on GitHub Pages.",
-    "Accessibility: keyboardable dialogs, focus rings, and required alt text on uploads."
+    "Modular architecture: small ES6 classes (`Card`, `FormValidator`, `Popup*`, `Section`, `UserInfo`) to isolate responsibilities.",
+    "Typed-ish data flow via constructor params + method contracts instead of global state.",
+    "Reusable modal primitives (`Popup`, `PopupWithImage`, `PopupWithForm`) so new dialogs are trivial.",
+    "Accessible UI details: focus management in popups, keyboard ESC close, and visible focus rings.",
+    "Client-side validation (`FormValidator`) with enable/disable submit, per-field errors, and clean CSS hooks.",
+    "`Api.js` wrapper centralizes all requests, headers, and error handling."
   ],
+
   "results": [
-    "Cold start → interactive in ~1.4s on mid-range laptops.",
-    "Typical uploaded images compressed to < 300 KB.",
-    "P95 like action ≤ 150 ms (optimistic), rollback rate < 1% on rule conflicts."
+    "Feature parity with a modern feed: add/delete cards, like/unlike, profile edit, image preview.",
+    "Architecture stays readable: each component owns one thing; easy to extend with new popups or fields."
   ],
+
   "highlights": [
-    { "label": "Hosting", "value": "GitHub Pages + Firebase" },
-    { "label": "Routing", "value": "HashRouter (refresh-safe)" },
-    { "label": "Feed TTI", "value": "~1.4s" }
+    { "label": "Modules", "value": "6+ core classes" },
+    { "label": "CSS", "value": "BEM blocks" },
+    { "label": "Framework", "value": "None" }
   ],
+
   "codePointers": [
-    { "label": "firebase.js (init)", "path": "src/lib/firebase.js" },
-    { "label": "Feed page", "path": "src/pages/Feed.jsx" },
-    { "label": "Upload dialog", "path": "src/components/UploadDialog.jsx" },
-    {
-      "label": "Like button (optimistic)",
-      "path": "src/components/LikeButton.jsx"
-    },
-    { "label": "Profile editor", "path": "src/components/ProfileEditor.jsx" },
-    { "label": "Styles", "path": "src/styles/index.css" },
-    { "label": "Firestore rules", "path": "firestore.rules" }
+    { "label": "Card — card rendering/likes", "path": "src/components/Card.js" },
+    { "label": "Form validation", "path": "src/components/FormValidator.js" },
+    { "label": "Popups (base & specializations)", "path": "src/components/Popup.js" },
+    { "label": "Image & form popups", "path": "src/components/PopupWithImage.js" },
+    { "label": "Lists/renderer", "path": "src/components/Section.js" },
+    { "label": "User profile state", "path": "src/components/UserInfo.js" },
+    { "label": "API wrapper", "path": "src/utils/Api.js" },
+    { "label": "Entry point", "path": "src/pages/index.js" }
   ],
+
   "next": [
-    "Image moderation queue with report flow",
-    "Progressive image placeholders (blurhash)"
+    "Form schemas per-popup to reduce boilerplate",
+    "Lazy-load full-size images; use low-quality placeholders",
+    "Bulk actions (multi-delete) and keyboard shortcuts"
   ]
 }

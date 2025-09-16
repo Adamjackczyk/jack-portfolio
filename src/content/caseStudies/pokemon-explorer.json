@@ -1,43 +1,59 @@
 {
+  "slug": "pokemon-explorer",
   "title": "Pokémon Explorer",
-  "intro": "Fast, searchable Pokédex with evolutions, shiny toggles, and a random team generator.",
+  "intro": "Fast, searchable Pokédex with evolutions, shiny toggles, and a random team generator — built in React with a light PokeAPI wrapper.",
   "links": {
     "live": "https://adamjackczyk.github.io/Pokeapi-frontend2/",
     "repo": "https://github.com/Adamjackczyk/Pokeapi-frontend2"
   },
   "heroMedia": { "type": "video", "src": "/media/pokemon-explorer.mp4" },
-  "problem": "Let users find any Pokémon instantly and explore evolutions/shiny forms without slow page hops.",
-  "tools": ["React", "TypeScript", "PokeAPI"],
+
+  "problem": "Let users find any Pokémon instantly and explore evolutions/shiny forms without slow page hops — keep the UI snappy and the codebase modular.",
+  "tools": [
+    "React",
+    "JavaScript (ES Modules)",
+    "PokeAPI",
+    "Jest + React Testing Library",
+    "CSS (component-scoped files)"
+  ],
+
   "solution": [
-    "Instant search with debounced queries; renders details as you type.",
-    "Evolution traversal with previous/next and tree-hop navigation.",
-    "Per-Pokémon shiny toggle plus a mass shiny mode for the current view.",
-    "Random team generator (6 per click) with one-tap refresh.",
-    "Quality-of-life: sticky back-to-top, keyboard navigation, and focus rings."
+    "Instant search with a controlled input in <SearchBar/>; debounced queries keep typing fluid.",
+    "Composable UI: <Main/> orchestrates sections, <DataPage/> handles details, <PokemonCard/> renders stats/sprite/shiny toggle.",
+    "Evolution traversal (prev/next + chain hops) on the details view to reduce page churn.",
+    "Shiny mode: per-card toggle plus an optional mass toggle pathway (kept simple in component state).",
+    "Random team generator returns 6 picks; easy refresh for new teams.",
+    "QoL & performance: <Preloader/> skeletons, <BackToTop/> helper, memoized list rendering, and a thin PokeAPI wrapper (utils/PokeApi.js).",
+    "Tests: smoke test for app mount and basic rendering in App.test.js with RTL."
   ],
+
   "results": [
-    "Sub-100 ms perceived search after debounce on typical connections.",
-    "Clear evolution traversal reduces page churn and confusion.",
-    "Random team flow increases engagement time."
+    "Perceived search latency ~sub-100 ms after debounce on typical connections.",
+    "Clearly separated concerns — components are small, CSS is scoped, and data fetching is centralized."
   ],
+
   "highlights": [
-    { "label": "Search", "value": "Instant results" },
-    { "label": "Evolutions", "value": "Prev/Next + tree hop" },
-    { "label": "Shiny", "value": "Per-card + mass toggle" },
-    { "label": "Generator", "value": "6 random / click" }
+    { "label": "Search", "value": "Instant + debounced" },
+    { "label": "Evolutions", "value": "Chain traversal" },
+    { "label": "Shiny", "value": "Per-card toggle" },
+    { "label": "Generator", "value": "6/team" }
   ],
+
   "codePointers": [
-    {
-      "label": "Search & results",
-      "url": "https://github.com/Adamjackczyk/Pokeapi-frontend2"
-    },
-    {
-      "label": "Random team & shiny logic",
-      "url": "https://github.com/Adamjackczyk/Pokeapi-frontend2"
-    }
+    { "label": "Search bar & debounce", "path": "src/components/SearchBar/SearchBar.jsx" },
+    { "label": "Results & layout", "path": "src/components/Main/Main.jsx" },
+    { "label": "Details page (evolutions)", "path": "src/components/DataPage/DataPage.jsx" },
+    { "label": "Pokémon card (shiny toggle)", "path": "src/components/PokemonCard/PokemonCard.jsx" },
+    { "label": "PokeAPI wrapper", "path": "src/utils/PokeApi.js" },
+    { "label": "Preloader (skeleton)", "path": "src/components/Preloader/Preloader.jsx" },
+    { "label": "Back to top", "path": "src/components/BackToTop/BackToTop.jsx" },
+    { "label": "App entry", "path": "src/App.js" },
+    { "label": "Tests (RTL)", "path": "src/App.test.js" }
   ],
+
   "next": [
-    "Local caching for offline revisit",
-    "Sprite prefetch for evolution chains"
+    "Client-side cache (IndexedDB/localStorage) to make repeat searches instant offline",
+    "Sprite prefetch for evolution chains",
+    "Keyboard nav for result grid + ARIA live region for search feedback"
   ]
 }
