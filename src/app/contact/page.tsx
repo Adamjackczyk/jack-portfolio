@@ -21,7 +21,7 @@ export default function ContactPage() {
 
     // Honeypot anti-spam
     if ((data.get("website") as string)?.length) {
-      setState("ok"); setMessage("Thanks!") // silently succeed
+      setState("ok"); setMessage("Thanks!")
       form.reset()
       return
     }
@@ -53,7 +53,7 @@ export default function ContactPage() {
 
         <div className="mt-5 flex flex-wrap gap-3">
           <a className="px-4 py-2 rounded-2xl bg-white text-black font-medium hover:opacity-90"
-             href={`mailto:${email}`}>Email me</a>
+             href={`mailto:${email}`}>Email Me</a>
           <a className="px-4 py-2 rounded-2xl border border-white/30 hover:border-white/60"
              href={linkedIn} target="_blank" rel="noreferrer">LinkedIn</a>
           <a className="px-4 py-2 rounded-2xl border border-white/30 hover:border-white/60"
@@ -109,7 +109,7 @@ export default function ContactPage() {
 
         <div className="mt-12">
           <a href="/" className="inline-block px-4 py-2 rounded-2xl border border-white/20 hover:border-white/40">
-            ← Back home
+            ← Back Home
           </a>
         </div>
       </section>

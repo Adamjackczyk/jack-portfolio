@@ -22,7 +22,7 @@ export default function CopyEmailButton({ email }: { email: string }) {
       type="button"
       aria-live="polite"
     >
-      {copied ? "Copied!" : "Copy email"}
+      {copied ? "Copied!" : "Copy Email"}
     </button>
   )
 }

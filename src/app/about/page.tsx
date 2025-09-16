@@ -25,7 +25,6 @@ I came across your portfolio and would love to chat about a front-end opportunit
     <main className="container mx-auto px-6 py-12">
       {/* ---------- HERO ---------- */}
       <header className="max-w-5xl">
-        <p className="opacity-70 text-sm">About</p>
 
         <div className="mt-2 grid gap-6 lg:grid-cols-[auto,1fr] lg:items-center">
           {/* Avatar */}
@@ -55,10 +54,10 @@ I came across your portfolio and would love to chat about a front-end opportunit
             </p>
 
             <div className="mt-4 flex flex-wrap gap-2">
-              <span className="px-3 py-1 rounded-full border border-white/15 text-sm opacity-90">Columbus, GA-area</span>
-              <span className="px-3 py-1 rounded-full border border-white/15 text-sm opacity-90">Remote possible</span>
-              <span className="px-3 py-1 rounded-full border border-white/15 text-sm opacity-90">Open to Front-End roles</span>
-              <span className="px-3 py-1 rounded-full border border-white/15 text-sm opacity-90">Immediate start</span>
+              <span className="px-3 py-1 rounded-full border border-white/15 text-sm opacity-90">Columbus, GA-Area</span>
+              <span className="px-3 py-1 rounded-full border border-white/15 text-sm opacity-90">Immediate Availability</span>
+              <span className="px-3 py-1 rounded-full border border-white/15 text-sm opacity-90">Remote/Hybrid</span>
+              <span className="px-3 py-1 rounded-full border border-white/15 text-sm opacity-90">Open to Front-End Roles</span>
             </div>
 
             {/* CTAs + Socials */}
@@ -68,7 +67,8 @@ I came across your portfolio and would love to chat about a front-end opportunit
                 className="px-4 py-2 rounded-2xl bg-white text-black font-medium hover:opacity-90"
                 href={mailto}
               >
-                Contact me
+                Contact
+                Me
               </a>
 
               {/* One-click copy */}
@@ -81,7 +81,7 @@ I came across your portfolio and would love to chat about a front-end opportunit
                 target="_blank"
                 rel="noreferrer"
               >
-                View résumé
+                View Resume
               </a>
 
               {/* Socials */}
@@ -124,13 +124,13 @@ I came across your portfolio and would love to chat about a front-end opportunit
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {[
             { label: "Shaders", value: "3+", hint: "Starfield • Sea • WIP" },
-            { label: "Performance", value: "≈60 FPS", hint: "desktop targets" },
-            { label: "Projects", value: "4 shipped", hint: "live + repos" },
+            { label: "Performance", value: "≈60 FPS", hint: "Desktop Targets" },
+            { label: "Projects", value: "4 shipped", hint: "Live + Repos" },
             { label: "Stack", value: "React/TS/Three", hint: "Next.js • Tailwind" },
           ].map((s, i) => (
             <div key={i} className="rounded-2xl border border-white/10 p-4 card">
               <div className="text-2xl font-semibold">{s.value}</div>
-              <div className="text-sm mt-1 opacity-80">{s.label}</div>
+              <div className="text-sm opacity-80">{s.label}</div>
               <div className="text-xs mt-1 opacity-60">{s.hint}</div>
             </div>
           ))}
@@ -142,11 +142,15 @@ I came across your portfolio and would love to chat about a front-end opportunit
         <div className="lg:col-span-2 space-y-10">
           {/* Tech */}
           <section>
-            <h2 className="text-xl font-semibold">Tech I use</h2>
+            <h2 className="text-xl font-semibold">My Stack</h2>
             <ul className="mt-4 flex flex-wrap gap-3">
               {[
-                "React","TypeScript","Next.js","Three.js","GLSL",
-                "Tailwind","Framer Motion","Vite/Next Build","Jest/RTL",
+                "React", "Next.js", "TypeScript",
+                "Three.js", "GLSL",
+                "Tailwind", "Framer Motion",
+                "Vite", "Jest/RTL",
+                "Accessibility (ARIA, keyboard)",
+                "Performance (images, code-split, WebGL)",
               ].map((t) => (
                 <li
                   key={t}
@@ -162,7 +166,7 @@ I came across your portfolio and would love to chat about a front-end opportunit
 
           {/* Wins */}
           <section>
-            <h2 className="text-xl font-semibold">Recent wins</h2>
+            <h2 className="text-xl font-semibold">Recent Wins</h2>
             <ul className="space-y-3 opacity-85 list-disc pl-5 mt-4">
               <li>Built real-time starfield shader (≈55k particles) with 60 FPS desktop, clean GLSL files.</li>
               <li>Shipped ocean shader with on-GPU normals (dFdx/dFdy) and specular highlights.</li>
@@ -174,7 +178,7 @@ I came across your portfolio and would love to chat about a front-end opportunit
           {/* CTA */}
           <section>
             <div className="card p-6 rounded-2xl">
-              <h2 className="text-xl font-semibold">Let’s work together</h2>
+              <h2 className="text-xl font-semibold">Let’s connect and collaborate</h2>
               <p className="mt-2 opacity-85">
                 I’m targeting Front-End roles where performance + polish matter (React/TS/Three.js).
               </p>
@@ -183,7 +187,7 @@ I came across your portfolio and would love to chat about a front-end opportunit
                   className="px-4 py-2 rounded-2xl bg-white text-black font-medium hover:opacity-90"
                   href={mailto}
                 >
-                  Email me
+                  Email Me
                 </a>
                 <a
                   className="px-4 py-2 rounded-2xl border border-white/30 hover:border-white/60"
@@ -191,7 +195,7 @@ I came across your portfolio and would love to chat about a front-end opportunit
                   target="_blank"
                   rel="noreferrer"
                 >
-                  Download résumé
+                  Download Resume
                 </a>
               </div>
             </div>
@@ -201,7 +205,7 @@ I came across your portfolio and would love to chat about a front-end opportunit
                 href="/"
                 className="inline-block px-4 py-2 rounded-2xl border border-white/20 hover:border-white/40"
               >
-                ← Back home
+                ← Back Home
               </a>
             </div>
           </section>
@@ -212,7 +216,7 @@ I came across your portfolio and would love to chat about a front-end opportunit
           <div className="card p-5 rounded-2xl">
             <h3 className="font-semibold">Contact</h3>
             <p className="opacity-80 text-sm mt-1">
-              Quickest way to reach me. I usually respond same day.
+              Perfered Contact Method
             </p>
             <div className="mt-4 flex flex-col gap-2">
               <a
@@ -228,7 +232,7 @@ I came across your portfolio and would love to chat about a front-end opportunit
                 rel="noreferrer"
                 className="px-4 py-2 rounded-xl border border-white/20 text-center hover:border-white/50"
               >
-                View résumé
+                View Resume
               </a>
               <div className="mt-2 flex gap-2">
                 <a

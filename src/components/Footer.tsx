@@ -38,7 +38,7 @@ export default function Footer() {
               <li><Link className="hover:underline underline-offset-4" href="/#work">Work</Link></li>
               <li><Link className="hover:underline underline-offset-4" href="/about">About</Link></li>
               <li><a   className="hover:underline underline-offset-4" href={`mailto:${email}`}>Contact</a></li>
-              <li><a   className="hover:underline underline-offset-4" href={resumeHref} target="_blank" rel="noreferrer">Résumé (PDF)</a></li>
+              <li><a   className="hover:underline underline-offset-4" href={resumeHref} target="_blank" rel="noreferrer">Resume (PDF)</a></li>
             </ul>
           </nav>
 
@@ -79,7 +79,7 @@ export default function Footer() {
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
                     <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6Zm1 7h5l-5-5v5Z"/>
                   </svg>
-                  Résumé (PDF)
+                  Resume(PDF)
                 </a>
               </li>
             </ul>

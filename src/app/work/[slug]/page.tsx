@@ -14,9 +14,9 @@ export const dynamicParams = false
 
 // --- Per-page metadata (SEO/OG)
 export async function generateMetadata(
-  { params }: { params: Promise<{ slug: string }> }     // 👈 Next 15: params is a Promise
+  { params }: { params: Promise<{ slug: string }> }
 ): Promise<Metadata> {
-  const { slug } = await params                          // 👈 await params
+  const { slug } = await params
   const data = await loadCase(slug)
   if (!data) return { title: "Case Study" }
   return {
@@ -32,9 +32,9 @@ export async function generateMetadata(
 
 // --- Page
 export default async function CasePage(
-  { params }: { params: Promise<{ slug: string }> }      // 👈 Promise here too
+  { params }: { params: Promise<{ slug: string }> }
 ) {
-  const { slug } = await params                          // 👈 await here
+  const { slug } = await params
   const data = await loadCase(slug)
   if (!data) return notFound()
 
@@ -215,7 +215,7 @@ export default async function CasePage(
           href="/"
           className="inline-block px-4 py-2 rounded-2xl border border-white/20 hover:border-white/40"
         >
-          ← Back home
+          ← Back Home
         </a>
       </div>
     </main>

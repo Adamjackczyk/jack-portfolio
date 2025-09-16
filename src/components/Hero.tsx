@@ -52,7 +52,7 @@ export default function Hero() {
             href="/about"
             className="px-5 py-3 rounded-2xl border border-white/30 hover:border-white/60 focus-visible:outline"
           >
-            About me
+            About Me
           </Link>
 
           {/* route to the contact section (no OS mail prompt) */}
