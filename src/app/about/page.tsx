@@ -1,17 +1,17 @@
-import Image from "next/image"
-import CopyEmailButton from "@/components/CopyEmailButton"
+import Image from "next/image";
+import CopyEmailButton from "@/components/CopyEmailButton";
 
 export const metadata = {
   title: "About — Jack Adamczyk",
   description:
     "Front-End developer focused on fast, immersive web experiences with React, TypeScript, and Three.js.",
-}
+};
 
 export default function AboutPage() {
-  const email = "jackadamczykjs@gmail.com"
-  const linkedIn = "https://www.linkedin.com/in/jackadamczyk"
-  const github = "https://github.com/Adamjackczyk"
-  const resumeHref = "/resume/jack-adamczyk-resume.pdf"
+  const email = "jackadamczykjs@gmail.com";
+  const linkedIn = "https://www.linkedin.com/in/jackadamczyk";
+  const github = "https://github.com/Adamjackczyk";
+  const resumeHref = "/resume/jack-adamczyk-resume.pdf";
 
   const mailto = `mailto:${email}?subject=${encodeURIComponent(
     "Front-End Role — Portfolio inquiry"
@@ -19,13 +19,12 @@ export default function AboutPage() {
 
 I came across your portfolio and would love to chat about a front-end opportunity.
 
-—`)}`
+—`)}`;
 
   return (
     <main className="container mx-auto px-6 py-12">
       {/* ---------- HERO ---------- */}
       <header className="max-w-5xl">
-
         <div className="mt-2 grid gap-6 lg:grid-cols-[auto,1fr] lg:items-center">
           {/* Avatar */}
           <div className="flex lg:block justify-start">
@@ -67,8 +66,7 @@ I came across your portfolio and would love to chat about a front-end opportunit
                 className="px-4 py-2 rounded-2xl bg-white text-black font-medium hover:opacity-90"
                 href={mailto}
               >
-                Contact
-                Me
+                Contact Me
               </a>
 
               {/* One-click copy */}
@@ -199,15 +197,6 @@ I came across your portfolio and would love to chat about a front-end opportunit
                 </a>
               </div>
             </div>
-
-            <div className="mt-12">
-              <a
-                href="/"
-                className="inline-block px-4 py-2 rounded-2xl border border-white/20 hover:border-white/40"
-              >
-                ← Back Home
-              </a>
-            </div>
           </section>
         </div>
 
@@ -216,7 +205,7 @@ I came across your portfolio and would love to chat about a front-end opportunit
           <div className="card p-5 rounded-2xl">
             <h3 className="font-semibold">Contact</h3>
             <p className="opacity-80 text-sm mt-1">
-              Perfered Contact Method
+              Preferred Contact Method
             </p>
             <div className="mt-4 flex flex-col gap-2">
               <a
@@ -277,11 +266,11 @@ I came across your portfolio and would love to chat about a front-end opportunit
             jobTitle: "Front-End Developer",
             email: `mailto:${email}`,
             url: process.env.NEXT_PUBLIC_SITE_URL,
-            image: "/me.png",
+            image: "/thumbs/me.png",
             sameAs: [github, linkedIn],
           }),
         }}
       />
     </main>
-  )
+  );
 }

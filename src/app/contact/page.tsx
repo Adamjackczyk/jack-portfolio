@@ -1,44 +1,52 @@
-"use client"
+"use client";
 
-import { useState } from "react"
+import { useState } from "react";
+import Link from "next/link";
 
 export default function ContactPage() {
-  const email = "jackadamczykjs@gmail.com"
-  const linkedIn = "https://www.linkedin.com/in/jackadamczyk"
-  const github = "https://github.com/Adamjackczyk"
-  const formId = process.env.NEXT_PUBLIC_FORMSPREE_ID
+  const email = "jackadamczykjs@gmail.com";
+  const linkedIn = "https://www.linkedin.com/in/jackadamczyk";
+  const github = "https://github.com/Adamjackczyk";
+  const formId = process.env.NEXT_PUBLIC_FORMSPREE_ID;
 
-  const [state, setState] = useState<"idle"|"submitting"|"ok"|"error">("idle")
-  const [message, setMessage] = useState("")
+  const [state, setState] = useState<"idle" | "submitting" | "ok" | "error">(
+    "idle"
+  );
+  const [message, setMessage] = useState("");
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault()
-    if (!formId) { setState("error"); setMessage("Form is not configured."); return }
-    setState("submitting")
+    e.preventDefault();
+    if (!formId) {
+      setState("error");
+      setMessage("Form is not configured.");
+      return;
+    }
+    setState("submitting");
 
-    const form = e.currentTarget
-    const data = new FormData(form)
+    const form = e.currentTarget;
+    const data = new FormData(form);
 
     // Honeypot anti-spam
     if ((data.get("website") as string)?.length) {
-      setState("ok"); setMessage("Thanks!")
-      form.reset()
-      return
+      setState("ok");
+      setMessage("Thanks!");
+      form.reset();
+      return;
     }
 
-    // Post to formspree
     const res = await fetch(`https://formspree.io/f/${formId}`, {
       method: "POST",
       headers: { Accept: "application/json" },
       body: data,
-    })
+    });
 
     if (res.ok) {
-      setState("ok"); setMessage("Thanks — I’ll reply soon!")
-      form.reset()
+      setState("ok");
+      setMessage("Thanks — I’ll reply soon!");
+      form.reset();
     } else {
-      setState("error")
-      setMessage("Oops, something went wrong. Try email instead.")
+      setState("error");
+      setMessage("Oops, something went wrong. Try email instead.");
     }
   }
 
@@ -48,16 +56,33 @@ export default function ContactPage() {
         <p className="opacity-70 text-sm">Contact</p>
         <h1 className="text-3xl sm:text-4xl font-semibold mt-1">Let’s talk</h1>
         <p className="mt-3 opacity-85">
-          Quickest response via this form or email. I’m open to Front-End roles (React/TS/Three.js).
+          Quickest response via this form or email. I’m open to Front-End roles
+          (React/TS/Three.js).
         </p>
 
         <div className="mt-5 flex flex-wrap gap-3">
-          <a className="px-4 py-2 rounded-2xl bg-white text-black font-medium hover:opacity-90"
-             href={`mailto:${email}`}>Email Me</a>
-          <a className="px-4 py-2 rounded-2xl border border-white/30 hover:border-white/60"
-             href={linkedIn} target="_blank" rel="noreferrer">LinkedIn</a>
-          <a className="px-4 py-2 rounded-2xl border border-white/30 hover:border-white/60"
-             href={github} target="_blank" rel="noreferrer">GitHub</a>
+          <a
+            className="px-4 py-2 rounded-2xl bg-white text-black font-medium hover:opacity-90"
+            href={`mailto:${email}`}
+          >
+            Email Me
+          </a>
+          <a
+            className="px-4 py-2 rounded-2xl border border-white/30 hover:border-white/60"
+            href={linkedIn}
+            target="_blank"
+            rel="noreferrer"
+          >
+            LinkedIn
+          </a>
+          <a
+            className="px-4 py-2 rounded-2xl border border-white/30 hover:border-white/60"
+            href={github}
+            target="_blank"
+            rel="noreferrer"
+          >
+            GitHub
+          </a>
         </div>
       </header>
 
@@ -108,11 +133,14 @@ export default function ContactPage() {
         </form>
 
         <div className="mt-12">
-          <a href="/" className="inline-block px-4 py-2 rounded-2xl border border-white/20 hover:border-white/40">
+          <Link
+            href="/"
+            className="inline-block px-4 py-2 rounded-2xl border border-white/20 hover:border-white/40"
+          >
             ← Back Home
-          </a>
+          </Link>
         </div>
       </section>
     </main>
-  )
+  );
 }
