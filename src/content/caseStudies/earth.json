@@ -1,0 +1,62 @@
+{
+  "slug": "earth",
+  "title": "Realistic Earth (Three.js + GLSL)",
+  "intro": "A physically-inspired Earth with day/night blending, cloud masking, ocean-only specular, atmospheric twilight, and a volumetric glow — all in custom GLSL, controlled live with GUI and deployed via GitHub Actions.",
+  "links": {
+    "live": "https://adamjackczyk.github.io/THREEjs-earth-shaders/",
+    "repo": "https://github.com/Adamjackczyk/THREEjs-earth-shaders"
+  },
+  "heroMedia": { "type": "video", "src": "/media/earth.mp4" },
+
+  "problem": "Render a convincing planet in WebGL without PBR libraries: handle day/night textures, specular highlights limited to oceans, cloud coverage, atmospheric scattering feel, and a separate volumetric atmosphere — all performant and portable to GitHub Pages.",
+  "tools": [
+    "Three.js",
+    "GLSL (custom vertex/fragment)",
+    "WebGL 2",
+    "Vite",
+    "vite-plugin-glsl",
+    "lil-gui",
+    "OrbitControls",
+    "GitHub Actions (Pages)"
+  ],
+
+  "solution": [
+    "Day/Night blend using dot(N, sunDir) → smoothstep remap to mix day.jpg and night.jpg in sRGB.",
+    "Specular only on oceans: reflect(−sunDir, N) • V → pow + mask from specularClouds.jpg (R).",
+    "Clouds from the same texture (G): thresholded smoothstep and multiplied by dayMix so they vanish at night.",
+    "Atmosphere color: mix(dayBlue, twilightOrange) by sun orientation; apply Fresnel vs. view for rim weighting.",
+    "Separate volumetric atmosphere mesh (BackSide) scaled 1.04× with alpha = edgeFresnel × day factor.",
+    "Texture sharpness at grazing angles via anisotropy = 8.",
+    "Robust asset paths using import.meta.env.BASE_URL and Vite base '/THREEjs-earth-shaders/' for Pages.",
+    "CI deploy: build on Actions, upload artifact, and deploy with actions/deploy-pages."
+  ],
+
+  "results": [
+    "Interactive globe with live sun controls (phi/theta), smooth day→night transition, and warm twilight rim.",
+    "Portable demo hosted on GitHub Pages with a single push (Actions pipeline).",
+    "Tight bundle for a shader project; loads textures from /static/ with sRGB correctness."
+  ],
+
+  "highlights": [
+    { "label": "Shaders", "value": "4 (2 vert / 2 frag)" },
+    { "label": "Textures", "value": "day, night, specular+clouds" },
+    { "label": "Anisotropy", "value": "8×" },
+    { "label": "Deployment", "value": "GitHub Actions → Pages" }
+  ],
+
+  "codePointers": [
+    { "label": "Entry / scene setup", "path": "src/script.js" },
+    { "label": "Earth vertex", "path": "src/shaders/earth/vertex.glsl" },
+    { "label": "Earth fragment", "path": "src/shaders/earth/fragment.glsl" },
+    { "label": "Atmosphere vertex", "path": "src/shaders/atmosphere/vertex.glsl" },
+    { "label": "Atmosphere fragment", "path": "src/shaders/atmosphere/fragment.glsl" },
+    { "label": "Vite config (Pages base)", "path": "vite.config.js" }
+  ],
+
+  "next": [
+    "Animate clouds via subtle UV flow; add perlin displacement for parallax.",
+    "Add starfield / Milky Way env and optional lens flare (assets already in /static/lenses).",
+    "Real-time Earth rotation speed tied to actual sidereal rate; time-of-day lighting control.",
+    "Post-processing pass for bloom and tone-mapped highlights."
+  ]
+}

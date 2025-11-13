@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link"
 import CopyEmailButton from "@/components/CopyEmailButton";
 
 export const metadata = {
@@ -11,7 +12,7 @@ export default function AboutPage() {
   const email = "jackadamczykjs@gmail.com";
   const linkedIn = "https://www.linkedin.com/in/jackadamczyk";
   const github = "https://github.com/Adamjackczyk";
-  const resumeHref = "/resume/jack-adamczyk-resume.pdf";
+  const resumeHref = "/resume/Jack-Resume.pdf";
 
   const mailto = `mailto:${email}?subject=${encodeURIComponent(
     "Front-End Role — Portfolio inquiry"
@@ -271,6 +272,14 @@ I came across your portfolio and would love to chat about a front-end opportunit
           }),
         }}
       />
+      <div className="mt-12">
+        <Link
+          href="/"
+          className="inline-block px-4 py-2 rounded-2xl border border-white/20 hover:border-white/40"
+        >
+          ← Back Home
+        </Link>
+      </div>
     </main>
   );
 }

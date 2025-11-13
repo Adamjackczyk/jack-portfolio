@@ -5,7 +5,7 @@ export default function Footer() {
   const email = "jackadamczykjs@gmail.com"
   const linkedIn = "https://www.linkedin.com/in/jackadamczyk"
   const github = "https://github.com/Adamjackczyk"
-  const resumeHref = "/resume/jack-adamczyk-resume.pdf"
+  const resumeHref = "/resume/Jack-Resume.pdf"
 
   return (
     <footer
