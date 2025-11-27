@@ -1,5 +1,33 @@
 [
   {
+    "slug": "earth",
+    "title": "Realistic Earth",
+    "cover": "/thumbs/earth.png",
+    "tags": ["Three.js", "GLSL", "Vite"],
+    "metrics": "Day/Night blend • Volumetric atmosphere • Ocean-only specular"
+  },
+  {
+    "slug": "cursor-game",
+    "title": "Particles Cursor Animation Shader",
+    "cover": "/thumbs/cursor-game.png",
+    "tags": ["Three.js", "GLSL", "Vite"],
+    "metrics": "Canvas displacement • GPU particles • Live cursor interaction"
+  },
+  {
+    "slug": "sea-shader",
+    "title": "Dynamic Sea Shader",
+    "cover": "/thumbs/sea-shader.png",
+    "tags": ["Three.js", "GLSL", "Lighting"],
+    "metrics": "On-GPU normals • Specular highlights • Single draw call"
+  },
+  {
+    "slug": "galaxy-generator",
+    "title": "Galaxy Generator",
+    "cover": "/thumbs/galaxy-generator.png",
+    "tags": ["Three.js", "GLSL", "Vite"],
+    "metrics": "GPU particles • 60 FPS desktop • ~30 FPS mobile"
+  },
+  {
     "slug": "pokemon-explorer",
     "title": "Pokémon Explorer",
     "cover": "/thumbs/pokemon-explorer.png",
@@ -12,26 +40,5 @@
     "cover": "/thumbs/around-the-us.png",
     "tags": ["Vanilla JS", "OOP", "Forms"],
     "metrics": "Responsive grid • Modal system • Client-side validation"
-  },
-  {
-    "slug": "earth",
-    "title": "Realistic Earth",
-    "cover": "/thumbs/earth.png",
-    "tags": ["Three.js", "GLSL", "Vite"],
-    "metrics": "Day/Night blend • Volumetric atmosphere • Ocean-only specular"
-  },
-  {
-    "slug": "galaxy-generator",
-    "title": "Galaxy Generator",
-    "cover": "/thumbs/galaxy-generator.png",
-    "tags": ["Three.js", "GLSL", "Vite"],
-    "metrics": "GPU particles • 60 FPS desktop • ~30 FPS mobile"
-  },
-  {
-    "slug": "sea-shader",
-    "title": "Dynamic Sea Shader",
-    "cover": "/thumbs/sea-shader.png",
-    "tags": ["Three.js", "GLSL", "Lighting"],
-    "metrics": "On-GPU normals • Specular highlights • Single draw call"
   }
 ]

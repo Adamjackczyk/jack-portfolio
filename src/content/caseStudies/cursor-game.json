@@ -1,0 +1,59 @@
+{
+  "slug": "cursor-game",
+  "title": "Particles Cursor Animation Shader (Three.js + GLSL)",
+  "intro": "An image-to-particles transformation driven entirely by custom GLSL, where a cursor-controlled displacement canvas dynamically pushes particles away with a glowing trail. Built with Three.js, shader-based point rendering, and deployed to GitHub Pages via Vite.",
+  "links": {
+    "live": "https://adamjackczyk.github.io/THREEjs-particles-cursor-animation-shader/",
+    "repo": "https://github.com/Adamjackczyk/THREEjs-particles-cursor-animation-shader"
+  },
+  "heroMedia": { 
+    "type": "video", 
+    "src": "/media/cursor-game.mp4" 
+  },
+  "problem": "Create a high-performance cursor-driven particle interaction system where an image is reconstructed from GPU-rendered points and dynamically displaced in real time using a 2D canvas as a live displacement texture, while remaining portable to GitHub Pages.",
+  "tools": [
+    "Three.js",
+    "GLSL (custom vertex/fragment)",
+    "WebGL 2",
+    "Vite",
+    "vite-plugin-glsl",
+    "OrbitControls",
+    "Canvas 2D (displacement map)",
+    "GitHub Pages"
+  ],
+  "solution": [
+    "Converted a full-resolution image into a dense GPU-driven particle field using a subdivided PlaneGeometry with index disabled for true point rendering.",
+    "Used a hidden 2D canvas as a live displacement texture, updated every frame with a fading trail buffer.",
+    "Mapped cursor position to UV space via raycasting against an invisible interaction plane, so displacement stays aligned with the image.",
+    "Generated radial displacement vectors per particle using randomized angles and intensity attributes controlled in the vertex shader.",
+    "Applied smoothstep thresholding on the displacement texture to avoid harsh stepping and keep motion feeling fluid.",
+    "Computed gl_PointSize in the vertex shader based on image brightness and depth attenuation for proper perspective.",
+    "Stamped a glow sprite into the displacement canvas with velocity-based alpha to create a responsive trail effect.",
+    "Configured Vite with a custom base path so the static build works cleanly on GitHub Pages."
+  ],
+  "results": [
+    "Responsive cursor-driven particle repulsion with smooth temporal fading and no visible popping.",
+    "Image remains recognizable while dynamically deforming under interaction, selling the illusion of a living photo.",
+    "Stable frame rate on mid-range hardware with a high-resolution particle field.",
+    "Self-contained demo deployed to GitHub Pages and linked directly from the portfolio."
+  ],
+  "highlights": [
+    { "label": "Shaders", "value": "2 (1 vertex / 1 fragment)" },
+    { "label": "Geometry Resolution", "value": "1024 × 1024 points" },
+    { "label": "Displacement Source", "value": "Live 2D canvas texture" },
+    { "label": "Deployment", "value": "Vite static build → GitHub Pages" }
+  ],
+  "codePointers": [
+    { "label": "Scene & particles setup", "path": "src/script.js" },
+    { "label": "Particles vertex shader", "path": "src/shaders/particles/vertex.glsl" },
+    { "label": "Particles fragment shader", "path": "src/shaders/particles/fragment.glsl" },
+    { "label": "Displacement canvas system", "path": "src/script.js (displacement section)" },
+    { "label": "Vite config (Pages base)", "path": "vite.config.js" }
+  ],
+  "next": [
+    "Add curl-noise flow fields for idle particle motion when the cursor is still.",
+    "Support multi-touch / mobile interactions by mapping multiple pointers into the displacement canvas.",
+    "Move displacement simulation fully onto the GPU using a ping-pong framebuffer instead of a 2D canvas.",
+    "Layer in post-processing bloom and additive glow to push the highlight energy further."
+  ]
+}
