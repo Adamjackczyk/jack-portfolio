@@ -1,10 +1,10 @@
 [
   {
-    "slug": "earth",
-    "title": "Realistic Earth",
-    "cover": "/thumbs/earth.png",
-    "tags": ["Three.js", "GLSL", "Vite"],
-    "metrics": "Day/Night blend • Volumetric atmosphere • Ocean-only specular"
+    "slug": "particle-morph",
+    "title": "Particle Morphing Shader",
+    "cover": "/thumbs/particle-morph.png",
+    "tags": ["Three.js", "GLSL","Blender", "Vite"],
+    "metrics": "GPU morphing • Custom shaders • Multi-mesh GLTF pipeline"
   },
   {
     "slug": "cursor-game",
@@ -12,6 +12,13 @@
     "cover": "/thumbs/cursor-game.png",
     "tags": ["Three.js", "GLSL", "Vite"],
     "metrics": "Canvas displacement • GPU particles • Live cursor interaction"
+  },
+  {
+    "slug": "earth",
+    "title": "Realistic Earth",
+    "cover": "/thumbs/earth.png",
+    "tags": ["Three.js", "GLSL", "Vite"],
+    "metrics": "Day/Night blend • Volumetric atmosphere • Ocean-only specular"
   },
   {
     "slug": "sea-shader",

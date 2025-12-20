@@ -1,0 +1,68 @@
+{
+  "slug": "particle-morph",
+  "title": "Particle Morphing Shader (Three.js + GLSL + Blender)",
+  "intro": "A GPU-driven particle morphing system that blends between multiple 3D shapes using custom GLSL vertex logic. Models were created in Blender, exported as GLB, loaded with GLTFLoader + DRACOLoader, and converted into normalized position buffers so every morph runs smoothly at real-time frame rates. Deployed as a static Vite build to GitHub Pages.",
+  "links": {
+    "live": "https://adamjackczyk.github.io/THREE-particles-morphing-shader/",
+    "repo": "https://github.com/Adamjackczyk/THREE-particles-morphing-shader"
+  },
+  "heroMedia": {
+    "type": "video",
+    "src": "/media/particle-morph.mp4"
+  },
+  "problem": "Build a high-performance particle system that can morph between multiple complex 3D shapes without updating large position attributes on the CPU each frame, while supporting real-world GLTF scenes with multiple meshes per model and mismatched vertex counts between morph targets.",
+  "tools": [
+    "Three.js",
+    "GLSL (custom vertex/fragment)",
+    "WebGL 2",
+    "Vite",
+    "vite-plugin-glsl",
+    "GLTFLoader",
+    "DRACOLoader",
+    "BufferGeometry",
+    "GSAP",
+    "lil-gui",
+    "OrbitControls",
+    "Blender",
+    "GitHub Pages"
+  ],
+  "solution": [
+    "Authored multiple morph-target models in Blender and exported them as a GLB asset for consistent import into the Three.js pipeline.",
+    "Loaded the GLB with GLTFLoader and DRACOLoader to keep the demo lightweight while still using high-vertex geometry.",
+    "Handled real-world GLTF structure by traversing each model, cloning each mesh geometry, applying matrixWorld transforms, and merging multi-mesh targets into a single geometry buffer.",
+    "Extracted position attributes for each target and computed the maximum vertex count across all shapes to establish a shared particle budget.",
+    "Normalized every target into a Float32Array of maxCount by filling missing vertices via randomized sampling from the original vertex set to avoid a visible clump at the origin.",
+    "Uploaded two position sets to the GPU, position and aPositionTarget, then performed morphing entirely in the vertex shader using mix() and a uProgress uniform.",
+    "Improved motion feel by driving per-particle delays with simplex noise sampled from both origin and target positions, then applying smoothstep-based timing windows for staggered starts and eased arrivals.",
+    "Added per-particle randomness via an aSize attribute and used additive blending with depthWrite disabled for a glowing, layered particle look.",
+    "Prevented morph targets from disappearing due to incorrect bounds by disabling frustum culling on the Points object."
+  ],
+  "results": [
+    "Smooth, GPU-driven morph transitions between multiple Blender-authored shapes without CPU-side attribute reuploads during animation.",
+    "Stable real-time rendering with large particle counts and visually pleasing staggered motion driven by simplex noise.",
+    "Supports complex GLTF targets composed of multiple meshes by merging them into a single particle buffer per shape.",
+    "Self-contained demo deployed to GitHub Pages and linked directly from the portfolio."
+  ],
+  "highlights": [
+    { "label": "Shaders", "value": "2 (1 vertex / 1 fragment)" },
+    { "label": "Morph Targets", "value": "5 shapes" },
+    { "label": "Animation Driver", "value": "GSAP uProgress (GPU morph)" },
+    { "label": "Asset Pipeline", "value": "Blender → GLB (Draco) → merged buffers" },
+    { "label": "Deployment", "value": "Vite static build → GitHub Pages" }
+  ],
+  "codePointers": [
+    { "label": "Scene, loaders, and morph system", "path": "src/script.js" },
+    { "label": "GLTF traversal and geometry merge", "path": "src/script.js (positions extraction + mergeGeometries)" },
+    { "label": "Vertex count normalization logic", "path": "src/script.js (maxCount + Float32Array harmonization)" },
+    { "label": "Particles vertex shader (morph + noise timing)", "path": "src/shaders/particles/vertex.glsl" },
+    { "label": "Particles fragment shader (alpha pattern + color)", "path": "src/shaders/particles/fragment.glsl" },
+    { "label": "Simplex noise include", "path": "src/shaders/includes/simplexNoise3d.glsl" },
+    { "label": "Vite config (Pages base path)", "path": "vite.config.js" }
+  ],
+  "next": [
+    "Move morph state to a GPGPU approach using ping-pong framebuffers to enable continuous flow-field motion and persistent particle velocity.",
+    "Add post-processing bloom and subtle chromatic aberration for higher perceived energy while keeping particle counts stable.",
+    "Improve target quality by generating consistent vertex sampling across shapes in Blender or during import to reduce over-sampling hotspots.",
+    "Add mobile-friendly interaction by mapping tap events to target cycling and offering a simplified UI for touch devices."
+  ]
+}
