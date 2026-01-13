@@ -1,5 +1,12 @@
 [
   {
+  "slug": "gpgpu-flowfield",
+  "title": "GPGPU Flow Field Particles",
+  "cover": "/thumbs/gpgpu-flowfield.png",
+  "tags": ["Three.js", "GLSL", "GPGPU", "Vite"],
+  "metrics": "GPU sim • Flow field noise • Model-based particles"
+},
+  {
     "slug": "particle-morph",
     "title": "Particle Morphing Shader",
     "cover": "/thumbs/particle-morph.png",

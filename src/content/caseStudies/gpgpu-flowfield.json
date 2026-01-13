@@ -1,0 +1,71 @@
+{
+    "slug": "gpgpu-flowfield",
+    "title": "GPGPU Flow Field Particles (Three.js + GLSL)",
+    "intro": "A GPU-simulated particle system where every vertex of a 3D model becomes a particle that detaches and flows through a procedural 3D flow field. Built using GPUComputationRenderer with custom GLSL simulation, Draco-loaded GLB geometry, and live tuning controls via lil-gui.",
+    "links": {
+    "live": "https://adamjackczyk.github.io/THREE-gpgpu-flow-field-particles-shaders/",
+    "repo": "https://github.com/Adamjackczyk/THREE-gpgpu-flow-field-particles-shaders"
+  },
+  "heroMedia": {
+    "type": "video",
+    "src": "/media/gpgpu-flowfield.mp4"
+  },
+
+  "problem": "Build a real-time particle simulation that can handle tens of thousands of particles efficiently by moving the simulation entirely onto the GPU, while keeping particle motion organic and controllable using procedural noise. The system must also support loading a Draco-compressed GLB model and turning its vertex colors into particle colors.",
+
+  "tools": [
+    "Three.js",
+    "GLSL (simulation + render shaders)",
+    "GPUComputationRenderer (GPGPU)",
+    "WebGL 2",
+    "Vite",
+    "vite-plugin-glsl",
+    "GLTFLoader + DRACOLoader",
+    "lil-gui",
+    "OrbitControls",
+    "GitHub Pages"
+  ],
+
+  "solution": [
+    "Loaded a Draco-compressed GLB and extracted the model’s BufferGeometry and vertex colors for particle rendering.",
+    "Allocated a GPU compute texture sized as ceil(sqrt(vertexCount))² so each particle has a unique pixel slot.",
+    "Initialized a base particle texture storing model-space position in RGB and a randomized lifetime seed in A.",
+    "Ran the particle simulation fully on the GPU using GPUComputationRenderer with a custom GLSL compute fragment shader.",
+    "Generated a 3D flow field from simplex noise, normalized into a direction vector, and applied it as velocity.",
+    "Controlled flow field behavior using three tunable parameters: influence threshold, strength multiplier, and frequency scaling.",
+    "Implemented a decay/lifetime system: particles respawn at their original model positions once lifetime reaches 1.0.",
+    "Rendered particles using a custom vertex shader that samples the compute texture using aParticlesUv to retrieve the simulated position.",
+    "Applied smooth size-in and size-out ramps based on lifetime for clean particle births and deaths without popping.",
+    "Ensured GitHub Pages compatibility by using import.meta.env.BASE_URL for both the Draco decoder path and GLB path."
+  ],
+
+  "results": [
+    "Model vertex particles break apart into a dynamic GPU-driven cloud with organic flow-field motion.",
+    "Simulation runs in real time with the heavy lifting done in shaders rather than CPU loops.",
+    "Particles preserve the original model’s vertex colors, keeping the look visually recognizable and vibrant.",
+    "Live controls allow quick iteration on visual style without touching shader code."
+  ],
+
+  "highlights": [
+    { "label": "Simulation", "value": "GPUComputationRenderer" },
+    { "label": "Flow Field", "value": "Simplex noise 3D" },
+    { "label": "Input", "value": "Draco GLB vertex colors" },
+    { "label": "Deployment", "value": "Vite → GitHub Pages" }
+  ],
+
+  "codePointers": [
+    { "label": "Scene setup + GPGPU init", "path": "src/script.js" },
+    { "label": "GPGPU simulation shader", "path": "src/shaders/gpgpu/particles.glsl" },
+    { "label": "Particles vertex shader", "path": "src/shaders/particles/vertex.glsl" },
+    { "label": "Particles fragment shader", "path": "src/shaders/particles/fragment.glsl" },
+    { "label": "Simplex noise include", "path": "src/shaders/includes/simplexNoise4d.glsl" },
+    { "label": "Vite config (Pages base)", "path": "vite.config.js" }
+  ],
+
+  "next": [
+    "Add pointer interaction to push the flow field away from the cursor for direct user control.",
+    "Blend between multiple base shapes by swapping base position textures over time.",
+    "Add turbulence by layering multiple octaves of noise for more complex flow structures.",
+    "Introduce a subtle additive bloom pass to make high-density particle areas feel more energetic."
+  ]
+}
