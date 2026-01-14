@@ -1,0 +1,61 @@
+{
+  "slug": "wobble",
+  "title": "Wobble Material (PBR + GLSL)",
+  "intro": "A physically-based wobble effect built by injecting custom GLSL into MeshPhysicalMaterial using Custom Shader Material, with correct lighting and shadow depth support, applied to both geometry and a Draco-loaded GLTF model.",
+  "links": {
+    "live": "https://adamjackczyk.github.io/Wobble/",
+    "repo": "https://github.com/Adamjackczyk/Wobble"
+  },
+  "heroMedia": { "type": "video", "src": "/media/wobble.mp4" },
+
+  "problem": "Create an organic animated wobble effect that deforms vertices in a vertex shader while keeping full MeshPhysicalMaterial lighting, reflections, and shadows working correctly (including shadow maps), and support both procedural geometry and imported GLTF models.",
+  "tools": [
+    "Three.js",
+    "GLSL (vertex/fragment)",
+    "three-custom-shader-material",
+    "Vite",
+    "vite-plugin-glsl",
+    "GLTFLoader",
+    "DRACOLoader",
+    "RGBELoader (HDRI)",
+    "OrbitControls",
+    "lil-gui"
+  ],
+
+  "solution": [
+    "Injected custom vertex + fragment shader logic into `MeshPhysicalMaterial` using Custom Shader Material instead of replacing the whole material.",
+    "Animated vertex displacement with 4D simplex noise, using time as the 4th dimension for smooth organic movement.",
+    "Moved vertices along their surface normal direction for proper “inflation/deflation” wobble instead of only shifting on Y.",
+    "Recomputed normals in the vertex shader using tangent + bitangent neighbor sampling to keep lighting correct after deformation.",
+    "Fixed shadow artifacts by creating a matching wobble-enabled custom depth material so the shadow map deforms consistently with the mesh.",
+    "Supported both a procedural icosahedron wobble and imported GLTF model wobble using the same shader pipeline.",
+    "Lit the scene with an HDR environment map + directional lighting for strong PBR highlights and readable material response.",
+    "Exposed wobble strength/frequency/time controls and color blending with live GUI tweaks for iteration."
+  ],
+
+  "results": [
+    "A clean PBR wobble effect that preserves reflections, shading, and shadows while animating geometry entirely on the GPU.",
+    "Reusable wobble shader setup that works on both primitive geometry and imported GLTF models with Draco compression."
+  ],
+
+  "highlights": [
+    { "label": "Material", "value": "MeshPhysicalMaterial" },
+    { "label": "Deform", "value": "Vertex shader" },
+    { "label": "Shadows", "value": "Custom depth pass" },
+    { "label": "Lighting", "value": "HDRI + sun" }
+  ],
+
+  "codePointers": [
+    { "label": "Entry / experience setup", "path": "src/script.js" },
+    { "label": "Wobble vertex shader", "path": "src/shaders/wobble/vertex.glsl" },
+    { "label": "Wobble fragment shader", "path": "src/shaders/wobble/fragment.glsl" },
+    { "label": "Noise include", "path": "src/shaders/includes/simplexNoise4d.glsl" },
+    { "label": "Vite config", "path": "vite.config.js" }
+  ],
+
+  "next": [
+    "Add optional audio-reactive wobble driven by FFT frequency bands.",
+    "Add postprocessing bloom toggle for a more stylized look while keeping a performance-safe default.",
+    "Support per-object wobble profiles so multiple models can animate differently in the same scene."
+  ]
+}

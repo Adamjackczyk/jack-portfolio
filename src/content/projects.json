@@ -1,5 +1,12 @@
 [
   {
+  "slug": "wobble",
+  "title": "Wobble Material (PBR + GLSL)",
+  "cover": "/thumbs/wobble.png",
+  "tags": ["Three.js", "GLSL", "PBR", "Vite"],
+  "metrics": "Custom Shader Material • Recomputed normals • Correct shadows"
+},
+  {
   "slug": "gpgpu-flowfield",
   "title": "GPGPU Flow Field Particles",
   "cover": "/thumbs/gpgpu-flowfield.png",
