@@ -1,0 +1,61 @@
+{
+  "slug": "pokeball-slice-wobble",
+  "title": "Sliced Pokeball + Wobbling Ditto (PBR + GLSL)",
+  "intro": "A sliced GLTF reveal effect with a stylized interior cut, plus a wobble deformation applied only to Ditto — built with Three.js + GLSL using CustomShaderMaterial while keeping PBR lighting and correct shadows.",
+  "links": {
+    "live": "https://adamjackczyk.github.io/pokeball/",
+    "repo": "https://github.com/Adamjackczyk/pokeball"
+  },
+  "heroMedia": { "type": "video", "src": "/media/pokeball-slice-wobble.mp4" },
+
+  "problem": "Slice a complex 3D model in real time without breaking lighting or shadow behavior — apply the effect only to specific meshes, keep the interior readable, and add an organic wobble animation to Ditto without deforming the Pokeball shell.",
+
+  "tools": [
+    "Three.js",
+    "GLSL (vertex/fragment)",
+    "three-custom-shader-material (CSM)",
+    "MeshStandardMaterial + MeshPhysicalMaterial (PBR)",
+    "GLTFLoader + DRACOLoader",
+    "Vite",
+    "vite-plugin-glsl",
+    "lil-gui"
+  ],
+
+  "solution": [
+    "Radial slicing using fragment-space angle math: `atan(y, x)` with `uSliceStart` offset and `mod(angle, 2*PI)` wrapping to prevent slicing glitches across negative angles.",
+    "Selective slicing by targeting only specific mesh names (Pokeball parts) during GLTF traversal, leaving other meshes unaffected.",
+    "Stylized interior cut by rendering backfaces with a controlled slice color using `gl_FrontFacing` and DoubleSide.",
+    "Preserved PBR lighting while adding custom behavior by injecting shader logic into built-in materials using CustomShaderMaterial instead of replacing the entire shading pipeline.",
+    "Correct slice shadows by implementing a matching custom depth material (MeshDepthMaterial + RGBADepthPacking) so shadow maps reflect the same discard logic.",
+    "Added an organic wobble deformation to Ditto only by injecting vertex displacement into MeshPhysicalMaterial while keeping reflections, environment lighting, and material response intact.",
+    "Kept the project portable for deployment by loading GLB/Draco using `import.meta.env.BASE_URL` so assets resolve correctly on GitHub Pages."
+  ],
+
+  "results": [
+    "Clean sliced-model reveal with a readable interior cut and correct lighting response.",
+    "Consistent shadows that match the slicing effect, including depth-map correctness.",
+    "Ditto-only wobble creates a strong visual focal point without destabilizing the Pokeball presentation."
+  ],
+
+  "highlights": [
+    { "label": "Slice", "value": "Radial discard + wrap fix" },
+    { "label": "PBR", "value": "Preserved via CSM" },
+    { "label": "Shadows", "value": "Custom depth pass" },
+    { "label": "Wobble", "value": "Ditto-only deformation" }
+  ],
+
+  "codePointers": [
+    { "label": "Scene setup + animation loop", "path": "src/script.js" },
+    { "label": "Slice uniforms", "path": "src/experience/createSliceUniforms.js" },
+    { "label": "Slice patch map injection", "path": "src/experience/createSlicePatchMap.js" },
+    { "label": "Slice materials (color + depth)", "path": "src/experience/createSliceMaterials.js" },
+    { "label": "Sliced model traversal + mesh targeting", "path": "src/experience/createSlicedModel.js" },
+    { "label": "Wobble material injection (PBR)", "path": "src/experience/createWobbleMaterial.js" }
+  ],
+
+  "next": [
+    "Animate slice start/arc for a clean reveal sequence (with easing).",
+    "Add a performance toggle for shadows + devicePixelRatio clamping.",
+    "Add subtle interior shading variation so the cut surface reads more “3D” without heavy geometry rebuild."
+  ]
+}

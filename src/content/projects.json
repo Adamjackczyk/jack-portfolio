@@ -1,5 +1,12 @@
 [
   {
+    "slug": "pokeball-slice-wobble",
+    "title": "Sliced Model + Wobble Shader",
+    "cover": "/thumbs/pokeball-slice-wobble.png",
+    "tags": ["Three.js", "GLSL", "CSM", "PBR", "Vite"],
+    "metrics": "Radial slicing • PBR preserved • Custom depth + normals"
+  },
+  {
   "slug": "wobble",
   "title": "Wobble Material (PBR + GLSL)",
   "cover": "/thumbs/wobble.png",
